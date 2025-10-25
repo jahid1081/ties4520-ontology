@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>TTL Subject Viewer</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root{
+      --bg:#0b0f16; --panel:#0f1521; --ink:#e8eefc; --muted:#a8b0c2;
+      --accent:#4dd4ff; --line:rgba(255,255,255,.08); --good:#64eeac; --bad:#ff6b6b;
+    }
+    html,body{background:var(--bg); color:var(--ink); margin:0; font:15px/1.45 system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    .wrap{max-width:1100px; margin:40px auto; padding:0 16px}
+    .header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px}
+    .brand{display:flex; align-items:center; gap:10px}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+    h1{font-size:20px; margin:0}
+    .bar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; color:var(--muted)}
+    .pill{border:1px solid var(--line); background:var(--panel); padding:6px 10px; border-radius:10px}
+    .btn{appearance:none; border:1px solid var(--line); background:var(--panel); color:var(--ink);
+         padding:8px 12px; border-radius:10px; cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+    .panel{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .table{width:100%; border-collapse:collapse; margin-top:6px}
+    .table th,.table td{border-top:1px solid var(--line); padding:10px; vertical-align:top}
+    .key{color:var(--accent)}
+    .small{color:var(--muted); font-size:13px}
+    .badge{display:inline-block; padding:.15rem .45rem; border:1px solid var(--line);
+           border-radius:8px; background:rgba(255,255,255,.03); color:var(--muted); margin-left:6px}
+    details{margin-top:14px}
+    .warn{color:var(--bad)}
+    .ok{color:var(--good)}
+    .footer{margin-top:24px; color:var(--muted)}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    code{background:rgba(255,255,255,.04); border:1px solid var(--line); padding:.2rem .35rem; border-radius:8px}
+  </style>
+  <!-- N3.js for Turtle parsing in the browser -->
+  <script src="https://unpkg.com/n3@1.17.3/browser/n3.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand"><div class="dot"></div><h1>TTL Subject Viewer</h1></div>
+      <div class="bar small">
+        <span id="srcPill" class="pill mono"></span>
+        <span id="iriPill" class="pill mono"></span>
+        <button id="openRaw" class="btn">Open raw TTL</button>
+        <button id="copyNT" class="btn">Copy as N-Triples</button>
+      </div>
+    </header>
+
+    <div id="status" class="small"></div>
+
+    <section class="panel">
+      <div id="titleLine" class="small"></div>
+      <table class="table mono" id="triplesTable">
+        <thead><tr><th>Predicate</th><th>Object</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <details id="bnSection" hidden>
+        <summary class="small">Blank node details</summary>
+        <div id="bnContent" class="mono"></div>
+      </details>
+    </section>
+
+    <div class="footer small">Tip: link like
+      <code>viewer.html?src=individuals.ttl&id=Series_Poker_Face_S01_E01</code>
+      or
+      <code>viewer.html?iri=https://…/individuals.ttl#Series_The_Boys_S01_E01</code>.
+    </div>
+  </div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const params = new URLSearchParams(location.search);
+  // also accept #iri=... in hash
+  const hashParams = new URLSearchParams(location.hash.startsWith('#') ? location.hash.slice(1) : '');
+
+  // Accept: iri (full IRI), or src + id (fragment)
+  let iri = params.get('iri') || hashParams.get('iri');
+  let src = params.get('src') || hashParams.get('src') || 'individuals.ttl';
+  const id  = params.get('id')  || hashParams.get('id');
+
+  if(!iri && id) iri = src.replace(/#.*$/,'') + '#' + id;
+
+  // Show pills
+  $('#srcPill').textContent = 'src=' + src;
+  $('#iriPill').textContent = 'subject=' + (iri || '(missing)');
+  $('#openRaw').onclick = () => window.open(src, '_blank');
+
+  if(!iri){
+    $('#status').innerHTML = '<span class="warn">Missing subject. Provide <code>?iri=…</code> or <code>?src=…&id=…</code>.</span>';
+    return;
+  }
+
+  const prefixes = {
+    'rdf:':'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+    'rdfs:':'http://www.w3.org/2000/01/rdf-schema#',
+    'xsd:':'http://www.w3.org/2001/XMLSchema#',
+    'onto:':'https://jahid1081.github.io/ties4520-ontology/ontology.ttl#',
+    'ind:':'https://jahid1081.github.io/ties4520-ontology/individuals.ttl#'
+  };
+
+  function qname(iri){
+    for(const [pfx, base] of Object.entries(prefixes)){
+      if(iri.startsWith(base)) return pfx + iri.slice(base.length);
+    }
+    return '<' + iri + '>';
+  }
+
+  function literalToText(obj){
+    if(obj.language) return `"${obj.value}"@${obj.language}`;
+    if(obj.datatype && obj.datatype.value && obj.datatype.value !== prefixes['xsd:']+'string')
+      return `"${obj.value}"^^${qname(obj.datatype.value)}`;
+    return `"${obj.value}"`;
+  }
+
+  async function load() {
+    $('#status').textContent = 'Loading ' + src + ' …';
+    try{
+      const res = await fetch(src, {headers:{'Accept':'text/turtle,text/plain;q=0.9,*/*;q=0.8'}});
+      if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+      const ttl = await res.text();
+      $('#status').textContent = 'Parsing …';
+      const parser = new N3.Parser({ baseIRI: src });
+      const quads = parser.parse(ttl);
+      // collect quads by subject
+      const rows = [];
+      const bnodes = new Map(); // id -> [quads]
+
+      for(const q of quads){
+        const s = q.subject.termType === 'NamedNode' ? q.subject.value
+              : (q.subject.termType === 'BlankNode' ? '_:'+q.subject.value : null);
+        if(s === iri){
+          rows.push(q);
+          if(q.object.termType === 'BlankNode'){
+            const key = '_:'+q.object.value;
+            bnodes.set(key, []);
+          }
+        }
+      }
+      // expand first-level bnodes
+      if(bnodes.size){
+        for(const q of quads){
+          if(q.subject.termType === 'BlankNode'){
+            const key = '_:'+q.subject.value;
+            if(bnodes.has(key)) bnodes.get(key).push(q);
+          }
+        }
+      }
+
+      // title line
+      const labelQuad = quads.find(q =>
+        q.subject.termType==='NamedNode' && q.subject.value===iri &&
+        q.predicate.termType==='NamedNode' && q.predicate.value=== prefixes['rdfs:']+'label'
+      );
+      $('#titleLine').innerHTML =
+        'Subject: <span class="mono">'+ qname(iri) +'</span>' +
+        (labelQuad ? ' · Label: <strong>'+ labelQuad.object.value +'</strong>' : '');
+
+      // fill table
+      const tbody = $('#rows');
+      tbody.innerHTML = '';
+      if(!rows.length){
+        tbody.innerHTML = '<tr><td colspan="2" class="small">No triples found for that subject.</td></tr>';
+      }else{
+        for(const q of rows){
+          const pred = qname(q.predicate.value);
+          let objText = '';
+          if(q.object.termType === 'NamedNode'){
+            objText = qname(q.object.value);
+          }else if(q.object.termType === 'Literal'){
+            objText = literalToText(q.object);
+          }else if(q.object.termType === 'BlankNode'){
+            objText = '<span class="badge">'+('_:'+q.object.value)+'</span>';
+          }
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td class="key">${pred}</td><td>${objText}</td>`;
+          tbody.appendChild(tr);
+        }
+      }
+
+      // blank node details
+      const bnSec = $('#bnSection');
+      const bnDiv = $('#bnContent');
+      if(bnodes.size){
+        bnSec.hidden = false;
+        let html = '';
+        for(const [id, list] of bnodes){
+          html += `<div style="margin-top:8px"><span class="badge">${id}</span><table class="table"><tbody>`;
+          for(const q of list){
+            const pred = qname(q.predicate.value);
+            let obj = '';
+            if(q.object.termType === 'NamedNode') obj = qname(q.object.value);
+            else if(q.object.termType === 'Literal') obj = literalToText(q.object);
+            else if(q.object.termType === 'BlankNode') obj = '<span class="badge">'+('_:'+q.object.value)+'</span>';
+            html += `<tr><td class="key">${pred}</td><td>${obj}</td></tr>`;
+          }
+          html += `</tbody></table></div>`;
+        }
+        bnDiv.innerHTML = html;
+      }else{
+        bnSec.hidden = true;
+      }
+
+      // copy as N-Triples
+      $('#copyNT').onclick = async () => {
+        const writer = new N3.Writer({ format: 'N-Triples' });
+        rows.forEach(q => writer.addQuad(q));
+        for(const [,list] of bnodes) list.forEach(q => writer.addQuad(q));
+        writer.end(async (err, ntriples) => {
+          if(err) { alert('Failed to serialise'); return; }
+          await navigator.clipboard.writeText(ntriples);
+          $('#status').innerHTML = `<span class="ok">Copied ${ntriples.split('\\n').filter(Boolean).length} triple(s) to clipboard.</span>`;
+        });
+      };
+
+      $('#status').textContent = 'Done.';
+    }catch(err){
+      $('#status').innerHTML = `<span class="warn">Failed: ${err.message}</span>`;
+      console.error(err);
+    }
+  }
+  load();
+})();
+</script>
+</body>
+</html>
