@@ -21,7 +21,7 @@
 
     .actions{display:flex;gap:10px;flex-wrap:wrap}
     .btn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);
-         padding:8px 12px;border-radius:10px;cursor:pointer}
+         padding:8px 12px;border-radius:10px;cursor:pointer;text-decoration:none;display:inline-block}
     .btn:hover{border-color:var(--accent)}
 
     .meta{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px}
@@ -59,6 +59,8 @@
     <header class="header">
       <div class="title"><div class="dot"></div><h1>TTL Subject Viewer</h1></div>
       <div class="actions">
+        <button id="goBack" class="btn" type="button" title="Go back">← Back</button>
+        <a href="index.html" class="btn" title="Homepage">Home</a>
         <button id="openRaw" class="btn" type="button">Open raw TTL</button>
         <button id="copyNT" class="btn" type="button">Copy as N-Triples</button>
       </div>
@@ -95,6 +97,9 @@
 <script>
 (function(){
   const $ = s => document.querySelector(s);
+
+  // Nav buttons
+  $("#goBack").onclick = () => history.back();
 
   // ------- Robust query handling -------
   const norm = s => (s||"").replace(/&amp;/gi,"&");
@@ -166,11 +171,10 @@
       });
     }
 
-    // add a row only for real triples (no blanks)
+    // rows: only real triples (no blank spacers)
     rows.forEach(q => {
       const pred = qname(q.predicate.value);
       let obj = "";
-
       if(q.object.termType==="NamedNode"){
         const target = q.object.value;
         obj = '<a class="mono" href="viewer.html?iri='+encodeURIComponent(target)+'">'+qname(target)+'</a>';
@@ -179,7 +183,6 @@
       }else if(q.object.termType==="BlankNode"){
         obj = '<span class="badge">'+("_:"+q.object.value)+'</span>';
       }
-
       const tr = document.createElement("tr");
       tr.innerHTML = '<td class="key mono">'+pred+'</td><td>'+obj+'</td>';
       tbody.appendChild(tr);
@@ -226,7 +229,7 @@
     try{
       if(!iri && !id){ alert("warn","Missing subject. Provide ?iri=… or ?src=…&id=…"); return; }
 
-      alert("", "Loading…");
+      alert("ok", "Loading…");
       const quads = await parseTTL(srcURL);
 
       let chosen=null, rows=[], bns=new Map();
