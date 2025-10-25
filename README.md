@@ -1,6 +1,6 @@
 # TV Knowledge Graph (GitHub Pages)
 **Owner:** `jahid1081`  
-**Live path:** `https://jahid1081.github.io/docs/`
+**Live path:** `https://jahid1081.github.io/`
 
 This is a complete starter:
 - **Ontology:** `docs/ontology.ttl` (expanded OWL)
@@ -20,7 +20,7 @@ This is a complete starter:
 
 ## Publish
 Create repo **`jahid1081.github.io`** (Public). Put `docs/` at the root and push to `main`.  
-Open: `https://jahid1081.github.io/docs/`
+Open: `https://jahid1081.github.io/`
 
 ## GraphDB
 1. Create a repository.
