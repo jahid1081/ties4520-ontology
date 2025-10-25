@@ -10,25 +10,32 @@ html,body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.45 system-u
 .wrap{max-width:1200px;margin:36px auto;padding:0 20px}
 header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
 h1{margin:0;font-size:26px;display:flex;gap:10px;align-items:center}
+h2{font-size:20px}
 .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 22px var(--accent)}
 .btn{appearance:none;border:1px solid var(--line);background:var(--btnBg);color:var(--ink);padding:8px 12px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
 .btn:hover{background:var(--btnHover);border-color:var(--accent)}
 .btn.small{padding:6px 10px;border-radius:10px}
 .actions{display:flex;gap:10px;flex-wrap:wrap}
 .section{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:22px}
-.section h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:18px}
+.section h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line)}
+.section-top{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;padding:12px 14px;border-bottom:1px solid var(--line)}
+.poster{width:240px;max-width:35%;min-width:200px;aspect-ratio:2/3;background:#0c1322;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+.poster img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.series-meta{flex:1 1 320px;min-width:260px}
+.series-meta .row{display:flex;gap:10px;margin:6px 0}
+.series-meta .label{color:var(--muted);min-width:120px}
+.series-meta .value{font-weight:600}
 .list{display:block}
 .item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line)}
 .item.group{background:rgba(255,255,255,.03);font-weight:700}
 .badge{margin-left:8px;padding:2px 8px;border-radius:10px;background:rgba(77,212,255,.15);border:1px solid rgba(77,212,255,.3)}
 </style>
     <script type="text/javascript">//<![CDATA[
-    function goBack(){ history.back(); }
+      function goBack(){ history.back(); }
     //]]></script>
   </head>
   <body>
     <div class="wrap">
-
       <header>
         <h1><span class="dot"></span>All Shows <span class="badge" id="countBadge">loading…</span></h1>
         <div class="actions">
@@ -44,9 +51,7 @@ h1{margin:0;font-size:26px;display:flex;gap:10px;align-items:center}
       <script type="text/javascript" src="https://unpkg.com/n3@1.17.3/browser/n3.min.js"></script>
       <script type="text/javascript" src="all-episodes.js"></script>
       <script type="text/javascript">//<![CDATA[
-        window.addEventListener('DOMContentLoaded', function(){
-          renderAllEpisodes('individuals.ttl', 'all-sections', 'countBadge');
-        });
+        window.addEventListener('DOMContentLoaded', function(){ renderAllEpisodes('individuals.ttl','all-sections','countBadge'); });
       //]]></script>
     </div>
   </body>

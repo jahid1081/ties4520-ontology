@@ -8,7 +8,13 @@
     if (text!=null){ node.textContent = text; }
     return node;
   }
-  // Find unique series keys from subjects like #Series_<Key>_S01_E01
+  // Map series key -> poster path and human label
+  // Keys match the fragment after "Series_" in your TTL subjects.
+  var POSTERS = {
+    "Poker_Face": { src: "img/poker-face.jpg", alt: "Poker Face poster", label: "Poker Face" },
+    "The_Bear":   { src: "img/the-bear.jpg",   alt: "The Bear poster",   label: "The Bear" },
+    "The_Boys":   { src: "img/the-boys.jpg",   alt: "The Boys poster",   label: "The Boys" }
+  };
   function discoverSeriesKeys(quads){
     var keys = Object.create(null);
     var re = /#Series_([^#]+)_S\d+_E\d+$/;
@@ -19,7 +25,8 @@
         if (m){ keys[m[1]] = true; }
       }
     }
-    return Object.keys(keys).sort();
+    var list = Object.keys(keys).sort();
+    return list;
   }
   function collectEpisodesFor(key, quads){
     var eps = [], seen = Object.create(null);
@@ -36,6 +43,10 @@
     }
     eps.sort(function(a,b){ return (a.s-b.s) || (a.e-b.e); });
     return eps;
+  }
+  function seriesLabelFromKey(key){
+    if (POSTERS[key] && POSTERS[key].label){ return POSTERS[key].label; }
+    return key.replace(/_/g,' ');
   }
   window.renderAllEpisodes = function(ttlPath, containerId, badgeId){
     var src  = ttlPath || 'individuals.ttl';
@@ -55,8 +66,28 @@
         for (var k=0;k<keys.length;k++){
           var key = keys[k];
           var section = el('section', { 'class':'section', 'about': 'ind:Series_' + key, 'typeof':'onto:Series' });
-          section.appendChild(el('h2', null, key.replace(/_/g,' ')));
+          // Top area with poster + meta
+          var top = el('div', { 'class':'section-top' });
+          var poster = el('div', { 'class':'poster' });
+          var posterInfo = POSTERS[key] || { src:'', alt:'Poster', label: seriesLabelFromKey(key) };
+          var img = el('img', { 'src': posterInfo.src || 'img/placeholder.png', 'alt': posterInfo.alt || (posterInfo.label + ' poster') });
+          poster.appendChild(img);
+          var meta = el('div', { 'class':'series-meta' });
+          meta.appendChild(el('h2', null, posterInfo.label));
+          var rowIri = el('div', { 'class':'row' });
+          rowIri.appendChild(el('div', { 'class':'label' }, 'IRI:'));
+          rowIri.appendChild(el('div', { 'class':'value' }, 'ind:Series_' + key));
+          meta.appendChild(rowIri);
+          var rowData = el('div', { 'class':'row' });
+          rowData.appendChild(el('div', { 'class':'label' }, 'Data:'));
+          var dataBtn = el('a', { 'class':'btn small', 'href':'individuals.ttl' }, 'individuals.ttl');
+          rowData.appendChild(dataBtn);
+          meta.appendChild(rowData);
+          top.appendChild(poster);
+          top.appendChild(meta);
+          section.appendChild(top);
 
+          // Episode list
           var list = el('div', { 'class':'list' });
           var eps = collectEpisodesFor(key, quads);
           if (!eps.length){
