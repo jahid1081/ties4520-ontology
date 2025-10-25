@@ -1,59 +1,98 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:;">
-    <link rel="stylesheet" href="styles.css"/>
-    <title>TV Knowledge Graph · Starter</title>
-  </head>
-  <body>
-    <div class="container">
-      <header class="header">
-        <div class="brand"><div class="dot"></div><h1>TV Knowledge Graph</h1></div>
-        <div class="actions">
-          <a class="btn" href="shows.xhtml">All Shows (XHTML+RDFa)</a>
-          <a class="btn" href="individuals.ttl">Individuals (TTL)</a>
-          <a class="btn" href="ontology.ttl">Ontology (TTL)</a>
-          <a class="btn" href="rules.n3">Rules (N3)</a>
-        </div>
-      </header>
-      <div class="grid">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TV Knowledge Graph</title>
+  <style>
+    :root{
+      --bg:#0b0f16; --panel:#0f1521; --ink:#e8eefc; --muted:#a8b0c2;
+      --accent:#4dd4ff; --line:rgba(255,255,255,.08); --shadow:0 12px 30px rgba(0,0,0,.35);
+      --btnBg:#111a2a; --btnHover:#162238; --chip:#0c1220;
+    }
+    html,body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.45 system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    .wrap{max-width:1280px;margin:40px auto;padding:0 20px}
+    header{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:22px}
+    h1{margin:0;font-size:28px;letter-spacing:.2px;display:flex;gap:12px;align-items:center}
+    .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 24px var(--accent)}
 
-        <article class="card">
-          <a href="poker-face.xhtml">
-            <img src="img/poker-face.jpg" alt="Poker Face poster" loading="lazy"/>
-            <div class="meta">
-              <span class="title">Poker Face</span>
-              <a class="badge" href="poker-face.xhtml" aria-label="Open Poker Face">Open</a>
-            </div>
-          </a>
-        </article>
-    
-        <article class="card">
-          <a href="the-bear.xhtml">
-            <img src="img/the-bear.jpg" alt="The Bear poster" loading="lazy"/>
-            <div class="meta">
-              <span class="title">The Bear</span>
-              <a class="badge" href="the-bear.xhtml" aria-label="Open The Bear">Open</a>
-            </div>
-          </a>
-        </article>
-    
-        <article class="card">
-          <a href="the-boys.xhtml">
-            <img src="img/the-boys.jpg" alt="The Boys poster" loading="lazy"/>
-            <div class="meta">
-              <span class="title">The Boys</span>
-              <a class="badge" href="the-boys.xhtml" aria-label="Open The Boys">Open</a>
-            </div>
-          </a>
-        </article>
-    
-      </div>
-      <hr/>
-      <p class="small">Triples: <kbd>docs/individuals.ttl</kbd> · Ontology: <kbd>docs/ontology.ttl</kbd> · Queries: <kbd>docs/queries.rq</kbd></p>
-      <footer class="footer">© 2025</footer>
-    </div>
-  </body>
+    /* Buttons (used everywhere) */
+    .btn{appearance:none;border:1px solid var(--line);background:var(--btnBg);color:var(--ink);
+         padding:9px 14px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+    .btn:hover{background:var(--btnHover);border-color:var(--accent)}
+    .btn.ghost{background:transparent}
+    .btn.small{padding:6px 10px;border-radius:10px;font-size:14px}
+
+    /* Top nav buttons */
+    .top-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+    /* Cards grid */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    @media (max-width:1200px){.grid{grid-template-columns:repeat(9,1fr)}}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(6,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:460px){.grid{grid-template-columns:repeat(2,1fr)}}
+
+    .card{grid-column:span 4;background:var(--panel);border:1px solid var(--line);border-radius:16px;
+          overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .poster-frame{width:100%;aspect-ratio:2/3;background:#0c1322;display:flex;align-items:center;justify-content:center}
+    .poster-frame img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+    .card-body{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .title-btn{font-weight:600}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:6px 9px;border-radius:10px;color:var(--muted)}
+
+    /* Hide old footer elements if they still exist */
+    .legacy-footer{display:none!important}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1><span class="dot"></span>TV Knowledge Graph</h1>
+      <nav class="top-actions">
+        <a class="btn small" href="shows.xhtml">All Shows (XHTML+RDFa)</a>
+        <a class="btn small" href="docs/individuals.ttl">Individuals (TTL)</a>
+        <a class="btn small" href="docs/ontology.ttl">Ontology (TTL)</a>
+        <a class="btn small" href="docs/rules.n3">Rules (N3)</a>
+      </nav>
+    </header>
+
+    <section class="grid">
+      <!-- Poker Face -->
+      <article class="card">
+        <div class="poster-frame">
+          <!-- keep your existing src; styles will size it correctly -->
+          <img class="poster" src="img/poker-face.jpg" alt="Poker Face poster"/>
+        </div>
+        <div class="card-body">
+          <a class="btn title-btn" href="poker-face.xhtml">Poker Face</a>
+          <a class="btn ghost" href="poker-face.xhtml">Open</a>
+        </div>
+      </article>
+
+      <!-- The Bear -->
+      <article class="card">
+        <div class="poster-frame">
+          <img class="poster" src="img/the-bear.jpg" alt="The Bear poster"/>
+        </div>
+        <div class="card-body">
+          <a class="btn title-btn" href="the-bear.xhtml">The Bear</a>
+          <a class="btn ghost" href="the-bear.xhtml">Open</a>
+        </div>
+      </article>
+
+      <!-- The Boys -->
+      <article class="card">
+        <div class="poster-frame">
+          <img class="poster" src="img/the-boys.jpg" alt="The Boys poster"/>
+        </div>
+        <div class="card-body">
+          <a class="btn title-btn" href="the-boys.xhtml">The Boys</a>
+          <a class="btn ghost" href="the-boys.xhtml">Open</a>
+        </div>
+      </article>
+    </section>
+  </div>
+</body>
 </html>
