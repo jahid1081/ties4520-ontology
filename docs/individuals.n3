@@ -84,7 +84,7 @@ ind:Person_Tiffany_Johnson a onto:Person , onto:Director ; rdfs:label "Tiffany J
 ind:Person_Tony_Tost a onto:Person , onto:Showrunner ; rdfs:label "Tony Tost" .
 ind:Person_Will_Guidara a onto:Person , onto:Writer ; rdfs:label "Will Guidara" .
 ind:Person_Wyatt_Cain a onto:Person , onto:Writer ; rdfs:label "Wyatt Cain" .
-ind:Series_Poker_Face a onto:Series ; rdfs:label "Poker Face" ; onto:poster "https://upload.wikimedia.org/wikipedia/en/b/be/Poker_Face_TV_logo.png" ; onto:relatedLink "https://en.wikipedia.org/wiki/Poker_Face_(TV_series)" .
+ind:Series_Poker_Face a onto:Series ; rdfs:label "Poker Face" ; onto:poster "https://jahid1081.github.io/ties4520-ontology/img/poker-face.jpg" ; onto:relatedLink "https://en.wikipedia.org/wiki/Poker_Face_(TV_series)" .
 ind:Series_Poker_Face onto:hasHomePlatform ind:Platform_Peacock .
 ind:Series_Poker_Face onto:hasShowrunner ind:Person_Nora_Zuckerman .
 ind:Series_Poker_Face onto:hasShowrunner ind:Person_Lilla_Zuckerman .
@@ -203,7 +203,7 @@ ind:Series_Poker_Face_S02_E12 a onto:Episode ; rdfs:label "The End of the Road" 
 ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E12 .
 ind:Series_Poker_Face_S02_E12 onto:hasDirector ind:Person_Natasha_Lyonne .
 ind:Series_Poker_Face_S02_E12 onto:hasWriter ind:Person_Laura_Deeley .
-ind:Series_The_Bear a onto:Series ; rdfs:label "The Bear" ; onto:poster "https://upload.wikimedia.org/wikipedia/en/5/5e/The_Bear_TV_series_title_card.png" ; onto:relatedLink "https://en.wikipedia.org/wiki/The_Bear_(TV_series)" .
+ind:Series_The_Bear a onto:Series ; rdfs:label "The Bear" ; onto:poster "https://jahid1081.github.io/ties4520-ontology/img/the-bear.jpg" ; onto:relatedLink "https://en.wikipedia.org/wiki/The_Bear_(TV_series)" .
 ind:Series_The_Bear onto:hasHomePlatform ind:Platform_Hulu .
 ind:Series_The_Bear onto:hasShowrunner ind:Person_Christopher_Storer .
 ind:Series_The_Bear onto:hasShowrunner ind:Person_Joanna_Calo .
@@ -388,7 +388,7 @@ ind:Series_The_Bear_S04_E10 a onto:Episode ; rdfs:label "Goodbye" ; onto:episode
 ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E10 .
 ind:Series_The_Bear_S04_E10 onto:hasDirector ind:Person_Christopher_Storer .
 ind:Series_The_Bear_S04_E10 onto:hasWriter ind:Person_Christopher_Storer .
-ind:Series_The_Boys a onto:Series ; rdfs:label "The Boys" ; onto:poster "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/The_Boys_logo.svg/512px-The_Boys_logo.svg.png" ; onto:relatedLink "https://en.wikipedia.org/wiki/The_Boys_(TV_series)" .
+ind:Series_The_Boys a onto:Series ; rdfs:label "The Boys" ; onto:poster "https://jahid1081.github.io/ties4520-ontology/img/the-boys.jpg" ; onto:relatedLink "https://en.wikipedia.org/wiki/The_Boys_(TV_series)" .
 ind:Series_The_Boys onto:hasHomePlatform ind:Platform_Prime_Video .
 ind:Series_The_Boys onto:hasShowrunner ind:Person_Eric_Kripke .
 ind:Series_The_Boys onto:streamsOn ind:Platform_Prime_Video .
