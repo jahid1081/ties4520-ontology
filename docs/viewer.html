@@ -4,75 +4,109 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>TTL Subject Viewer</title>
+
   <style>
-    :root{--bg:#0b0f16;--panel:#0f1521;--ink:#e8eefc;--muted:#a8b0c2;--accent:#4dd4ff;--line:rgba(255,255,255,.08);--ok:#64eeac;--bad:#ff6b6b}
+    :root{
+      --bg:#0b0f16; --panel:#0f1521; --ink:#e8eefc; --muted:#a8b0c2;
+      --accent:#4dd4ff; --line:rgba(255,255,255,.08);
+      --ok:#64eeac; --warn:#ffcf66; --bad:#ff6b6b;
+      --stripe:rgba(255,255,255,.02);
+    }
     html,body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.45 system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    .wrap{max-width:1100px;margin:40px auto;padding:0 16px}
-    .header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-    .brand{display:flex;align-items:center;gap:10px}.dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
-    h1{margin:0;font-size:20px}
-    .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;color:var(--muted)}
-    .pill{border:1px solid var(--line);background:var(--panel);padding:6px 10px;border-radius:10px}
-    .btn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .wrap{max-width:1280px;margin:36px auto;padding:0 20px}
+    .header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+    .title{display:flex;align-items:center;gap:10px}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+    h1{margin:0;font-size:22px;letter-spacing:.2px}
+
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+         padding:8px 12px;border-radius:10px;cursor:pointer}
     .btn:hover{border-color:var(--accent)}
-    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px}
+    .pill{border:1px solid var(--line);background:var(--panel);padding:6px 10px;border-radius:10px;color:var(--muted)}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-    .table{width:100%;border-collapse:collapse;margin-top:6px}
-    .table th,.table td{border-top:1px solid var(--line);padding:10px;vertical-align:top}
-    .key{color:var(--accent)}.small{color:var(--muted);font-size:13px}
-    .badge{display:inline-block;padding:.15rem .45rem;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.03);color:var(--muted);margin-left:6px}
-    details{margin-top:14px}.ok{color:var(--ok)}.warn{color:var(--bad)}
-    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+
+    .alert{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px}
+    .alert.ok{background:rgba(100,238,172,.07);border-color:rgba(100,238,172,.35);color:var(--ok)}
+    .alert.warn{background:rgba(255,207,102,.07);border-color:rgba(255,207,102,.35);color:var(--warn)}
+    .alert.bad{background:rgba(255,107,107,.07);border-color:rgba(255,107,107,.35);color:var(--bad)}
+
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    .panel-head{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}
+    .panel-head .label{color:var(--muted)}
+    .panel-body{padding:0}
+
+    table{width:100%;border-collapse:collapse}
+    thead th{position:sticky;top:0;background:rgba(255,255,255,.03);backdrop-filter:saturate(120%);
+             border-bottom:1px solid var(--line);padding:10px 12px;text-align:left}
+    tbody td{border-top:1px solid var(--line);padding:10px 12px;vertical-align:top}
+    tbody tr:nth-child(odd){background:var(--stripe)}
+    .key{color:var(--accent)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
     code{background:rgba(255,255,255,.04);border:1px solid var(--line);padding:.2rem .35rem;border-radius:8px}
+    .badge{display:inline-block;padding:.15rem .45rem;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.03);color:var(--muted)}
+    details{margin-top:16px}
+    summary{cursor:pointer;color:var(--muted)}
   </style>
+
   <script src="https://unpkg.com/n3@1.17.3/browser/n3.min.js"></script>
 </head>
 <body>
   <div class="wrap">
     <header class="header">
-      <div class="brand"><div class="dot"></div><h1>TTL Subject Viewer</h1></div>
-      <div class="bar small">
-        <span id="srcPill" class="pill mono"></span>
-        <span id="iriPill" class="pill mono"></span>
+      <div class="title"><div class="dot"></div><h1>TTL Subject Viewer</h1></div>
+      <div class="actions">
         <button id="openRaw" class="btn" type="button">Open raw TTL</button>
         <button id="copyNT" class="btn" type="button">Copy as N-Triples</button>
       </div>
     </header>
 
-    <div id="status" class="small"></div>
+    <div class="meta">
+      <span id="srcPill" class="pill mono"></span>
+      <span id="iriPill" class="pill mono"></span>
+    </div>
+
+    <div id="status" class="alert ok" role="status" aria-live="polite">Loading…</div>
 
     <section class="panel">
-      <div id="titleLine" class="small"></div>
-      <table class="table mono" id="triplesTable">
-        <thead><tr><th>Predicate</th><th>Object</th></tr></thead>
-        <tbody id="rows"></tbody>
-      </table>
-
-      <details id="bnSection" hidden>
-        <summary class="small">Blank node details</summary>
-        <div id="bnContent" class="mono"></div>
-      </details>
+      <div class="panel-head">
+        <span class="label">Subject:</span>
+        <span id="subjectLine" class="mono"></span>
+      </div>
+      <div class="panel-body">
+        <table>
+          <thead>
+            <tr><th>Predicate</th><th>Object</th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
     </section>
 
-    <p class="small" style="margin-top:12px">
-      Tip: link like <code>viewer.html?iri=https://…/docs/individuals.ttl#Series_The_Boys_S01_E01</code>
-      or <code>viewer.html?src=individuals.ttl&amp;id=Series_Poker_Face_S01_E01</code>.
-    </p>
+    <details id="bnSection" hidden>
+      <summary>Blank node details</summary>
+      <div id="bnContent" class="mono"></div>
+    </details>
   </div>
 
 <script>
 (function(){
   const $ = s => document.querySelector(s);
-  const normalizeAmp = s => (s || "").replace(/&amp;/gi, "&");   // tolerate &amp; in URL
-  const search = new URLSearchParams(normalizeAmp(location.search).replace(/^\?/, ""));
-  const hash   = new URLSearchParams(normalizeAmp(location.hash).replace(/^#/, ""));
 
-  let iri = search.get("iri") || hash.get("iri");
-  let src = search.get("src") || hash.get("src") || "individuals.ttl";
-  const id = search.get("id") || hash.get("id");
+  // ------- Robust query handling -------
+  const norm = s => (s||"").replace(/&amp;/gi,"&");
+  const params = new URLSearchParams(norm(location.search).replace(/^\?/,''));
+  const hash   = new URLSearchParams(norm(location.hash).replace(/^#/,''));
 
-  const srcURL = new URL(src, location.href).href;           // absolute URL to fetch
-  if (!iri && id) iri = srcURL.replace(/#.*$/,"") + "#" + id; // build IRI when only id given
+  let iri = params.get("iri") || hash.get("iri");
+  let src = params.get("src") || hash.get("src") || "individuals.ttl";
+  const id = params.get("id") || hash.get("id");
+
+  const srcURL = new URL(src, location.href).href;
+  if (!iri && id) iri = srcURL.replace(/#.*$/,'') + "#" + id;
 
   $("#srcPill").textContent = "src=" + (new URL(srcURL).pathname.split("/").pop() || srcURL);
   $("#iriPill").textContent = "subject=" + (iri || "(missing)");
@@ -82,130 +116,151 @@
     "rdf:":"http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs:":"http://www.w3.org/2000/01/rdf-schema#",
     "xsd:":"http://www.w3.org/2001/XMLSchema#",
-    "onto:":"https://jahid1081.github.io/ties4520-ontology/ontology.ttl#",
+    // support both bases so QNames look nice regardless of how data was minted
     "ind:":"https://jahid1081.github.io/ties4520-ontology/docs/individuals.ttl#",
-    "ind2:":"https://jahid1081.github.io/ties4520-ontology/individuals.ttl#"
+    "ind2:":"https://jahid1081.github.io/ties4520-ontology/individuals.ttl#",
+    "onto:":"https://jahid1081.github.io/ties4520-ontology/ontology.ttl#"
   };
-  const qname = u => { for (const [p,b] of Object.entries(prefixes)) if (u.startsWith(b)) return p+u.slice(b.length); return "<"+u+">"; };
-  const lit  = o => o.language ? `"${o.value}"@${o.language}` :
-                     (o.datatype && o.datatype.value && o.datatype.value !== prefixes["xsd:"]+"string")
-                     ? `"${o.value}"^^${qname(o.datatype.value)}` : `"${o.value}"`;
+  const qname = u => {for(const [p,b] of Object.entries(prefixes)){if(u.startsWith(b)) return p+u.slice(b.length);} return "<"+u+">";}
+  const lit = o => o.language ? `"${o.value}"@${o.language}`
+                : (o.datatype && o.datatype.value && o.datatype.value !== prefixes["xsd:"]+"string")
+                  ? `"${o.value}"^^${qname(o.datatype.value)}` : `"${o.value}"`;
+
+  function alert(kind,msg){
+    const box = $("#status");
+    box.className = "alert " + kind;
+    box.textContent = msg;
+  }
 
   async function parseTTL(url){
-    const res = await fetch(url, { headers: { "Accept":"text/turtle,text/plain;q=0.9,*/*;q=0.8" }});
-    if (!res.ok) throw new Error(res.status + " " + res.statusText);
-    const text = await res.text();
-    return new N3.Parser({ baseIRI: url }).parse(text);
+    const res = await fetch(url, {headers:{"Accept":"text/turtle,text/plain;q=0.9,*/*;q=0.8"}});
+    if(!res.ok) throw new Error(res.status+" "+res.statusText);
+    const ttl = await res.text();
+    return new N3.Parser({baseIRI:url}).parse(ttl);
   }
 
   function render(quads, subjectIRI){
-    $("#iriPill").textContent = "subject=" + subjectIRI;
-    const label = quads.find(q => q.subject.termType==="NamedNode" && q.subject.value===subjectIRI &&
-                                  q.predicate.termType==="NamedNode" && q.predicate.value==="http://www.w3.org/2000/01/rdf-schema#label");
-    $("#titleLine").innerHTML = 'Subject: <span class="mono">'+qname(subjectIRI)+'</span>' +
-                                (label ? ' · Label: <strong>'+label.object.value+'</strong>' : '');
-    const rowsEl = $("#rows"); rowsEl.innerHTML = "";
-    const rows = quads.filter(q => q.subject.termType==="NamedNode" && q.subject.value===subjectIRI);
-    if (!rows.length){ rowsEl.innerHTML = '<tr><td colspan="2" class="small">No triples found for that subject.</td></tr>'; return {rows,bns:new Map()};}
+    $("#subjectLine").textContent = qname(subjectIRI);
 
-    // collect direct bnodes
-    const bns = new Map();
-    rows.forEach(q => { if (q.object.termType==="BlankNode") bns.set("_:"+q.object.value, []); });
-    if (bns.size){
-      quads.forEach(q => { if (q.subject.termType==="BlankNode"){ const k="_:"+q.subject.value; if (bns.has(k)) bns.get(k).push(q); }});
+    const tbody = $("#rows");
+    tbody.innerHTML = "";
+
+    const rows = quads.filter(q => q.subject.termType==="NamedNode" && q.subject.value===subjectIRI);
+
+    if(!rows.length){
+      const tr = document.createElement("tr");
+      tr.innerHTML = '<td colspan="2" class="small">No triples found for that subject.</td>';
+      tbody.appendChild(tr);
+      return { rows: [], bns: new Map() };
     }
 
+    // collect only direct bnodes for convenience
+    const bnodes = new Map();
+    rows.forEach(q => { if(q.object.termType==="BlankNode") bnodes.set("_:"+q.object.value, []); });
+    if(bnodes.size){
+      quads.forEach(q => {
+        if(q.subject.termType==="BlankNode"){
+          const k = "_:"+q.subject.value;
+          if(bnodes.has(k)) bnodes.get(k).push(q);
+        }
+      });
+    }
+
+    // add a row only for real triples (no blanks)
     rows.forEach(q => {
-      const tr = document.createElement("tr");
       const pred = qname(q.predicate.value);
       let obj = "";
-      if (q.object.termType==="NamedNode") obj = qname(q.object.value);
-      else if (q.object.termType==="Literal") obj = lit(q.object);
-      else obj = '<span class="badge">'+("_:"+q.object.value)+'</span>';
-      tr.innerHTML = '<td class="key">'+pred+'</td><td>'+obj+'</td>';
-      rowsEl.appendChild(tr);
+
+      if(q.object.termType==="NamedNode"){
+        const target = q.object.value;
+        obj = '<a class="mono" href="viewer.html?iri='+encodeURIComponent(target)+'">'+qname(target)+'</a>';
+      }else if(q.object.termType==="Literal"){
+        obj = lit(q.object);
+      }else if(q.object.termType==="BlankNode"){
+        obj = '<span class="badge">'+("_:"+q.object.value)+'</span>';
+      }
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = '<td class="key mono">'+pred+'</td><td>'+obj+'</td>';
+      tbody.appendChild(tr);
     });
 
+    // render bnodes section only if present
     const bnSec = $("#bnSection"), bnDiv = $("#bnContent");
-    if (bns.size){
+    if(bnodes.size){
       bnSec.hidden = false;
       let html = "";
-      for (const [id,list] of bns){
-        html += '<div style="margin-top:8px"><span class="badge">'+id+'</span><table class="table"><tbody>';
-        list.forEach(q => {
+      for(const [id,list] of bnodes){
+        html += '<div style="margin-top:8px"><span class="badge">'+id+'</span><table><tbody>';
+        list.forEach(q=>{
           const pred = qname(q.predicate.value);
-          let obj = "";
-          if (q.object.termType==="NamedNode") obj = qname(q.object.value);
-          else if (q.object.termType==="Literal") obj = lit(q.object);
+          let obj="";
+          if(q.object.termType==="NamedNode") obj = qname(q.object.value);
+          else if(q.object.termType==="Literal") obj = lit(q.object);
           else obj = '<span class="badge">'+("_:"+q.object.value)+'</span>';
-          html += '<tr><td class="key">'+pred+'</td><td>'+obj+'</td></tr>';
+          html += '<tr><td class="key mono" style="padding:6px 10px">'+pred+'</td><td style="padding:6px 10px">'+obj+'</td></tr>';
         });
         html += '</tbody></table></div>';
       }
       bnDiv.innerHTML = html;
-    } else {
+    }else{
       bnSec.hidden = true;
     }
-    return {rows,bns};
+
+    return { rows, bnodes };
   }
 
-  function buildCandidates(initialIri){
-    const set = new Set(); if (initialIri) set.add(initialIri);
-    const frag = (initialIri && initialIri.includes("#")) ? initialIri.split("#").pop() : (id || null);
-    if (!frag) return Array.from(set);
-    const base = srcURL.replace(/#.*$/,"");
-    set.add(base + "#"+frag);
-    // with/without /docs/ alternates
-    set.add(base.replace("/ties4520-ontology/","/ties4520-ontology/docs/") + "#"+frag);
-    set.add(base.replace("/ties4520-ontology/docs/","/ties4520-ontology/") + "#"+frag);
-    return Array.from(set);
+  function candidateIRIs(initial){
+    const out = new Set(); if(initial) out.add(initial);
+    const frag = (initial && initial.includes("#")) ? initial.split("#").pop() : (id || null);
+    if(!frag) return [...out];
+    const base = srcURL.replace(/#.*$/,'');
+    out.add(base + "#"+frag);
+    // with/without /docs/
+    out.add(base.replace("/ties4520-ontology/","/ties4520-ontology/docs/") + "#"+frag);
+    out.add(base.replace("/ties4520-ontology/docs/","/ties4520-ontology/") + "#"+frag);
+    return [...out];
   }
 
   (async () => {
     try{
-      if (!iri && !id){ $("#status").innerHTML = '<span class="warn">Missing subject. Provide <code>?iri=…</code> or <code>?src=…&amp;id=…</code>.</span>'; return; }
+      if(!iri && !id){ alert("warn","Missing subject. Provide ?iri=… or ?src=…&id=…"); return; }
 
-      $("#status").textContent = "Loading " + srcURL + " …";
+      alert("", "Loading…");
       const quads = await parseTTL(srcURL);
 
-      // 1) Try candidates built from provided iri/src/id
-      let chosen = null, rows = [], bns = new Map();
-      for (const cand of buildCandidates(iri)){
+      let chosen=null, rows=[], bns=new Map();
+      for(const cand of candidateIRIs(iri)){
         ({rows,bns} = render(quads, cand));
-        if (rows.length){ chosen = cand; break; }
+        if(rows.length){ chosen=cand; break; }
       }
 
-      // 2) If still nothing, scan by fragment across all subjects in the TTL
-      if (!chosen){
+      if(!chosen){
         const frag = (iri && iri.includes("#")) ? iri.split("#").pop() : (id || null);
-        if (frag){
+        if(frag){
           const hit = quads.find(q => q.subject.termType==="NamedNode" && q.subject.value.endsWith("#"+frag));
-          if (hit){
+          if(hit){
             ({rows,bns} = render(quads, hit.subject.value));
-            if (rows.length) chosen = hit.subject.value;
+            if(rows.length) chosen = hit.subject.value;
           }
         }
       }
 
-      // Copy N-Triples of what we’re showing
       $("#copyNT").onclick = async () => {
-        if (!rows.length){ $("#status").textContent = "No triples to copy."; return; }
-        const w = new N3.Writer({ format:"N-Triples" });
-        rows.forEach(q => w.addQuad(q));
-        for (const [,list] of bns) list.forEach(q => w.addQuad(q));
-        w.end(async (err, nt) => {
-          if (err){ $("#status").innerHTML = '<span class="warn">Failed to serialise.</span>'; return; }
+        if(!rows.length){ alert("warn","No triples to copy."); return; }
+        const w = new N3.Writer({format:"N-Triples"});
+        rows.forEach(q=>w.addQuad(q));
+        for(const [,list] of bns) list.forEach(q=>w.addQuad(q));
+        w.end(async (err,nt)=>{
+          if(err){ alert("bad","Failed to serialise."); return; }
           await navigator.clipboard.writeText(nt);
-          $("#status").innerHTML = '<span class="ok">Copied '+ nt.split("\n").filter(Boolean).length +' triple(s) to clipboard.</span>';
+          alert("ok","Copied "+ nt.split("\n").filter(Boolean).length +" triple(s) to clipboard.");
         });
       };
 
-      $("#status").innerHTML = chosen
-        ? '<span class="ok">Done.</span>'
-        : '<span class="warn">Done. No triples for that IRI in this dataset.</span>';
-
+      alert(chosen ? "ok" : "warn", chosen ? "Done." : "Done. No triples for that IRI in this dataset.");
     }catch(e){
-      $("#status").innerHTML = '<span class="warn">Failed: '+ e.message +'</span>';
+      alert("bad","Failed: "+e.message);
       console.error(e);
     }
   })();
