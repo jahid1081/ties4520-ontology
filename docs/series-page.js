@@ -1,164 +1,181 @@
+
+/* series-page.js — renders a single series page using TTL (XHTML-safe) */
 (function(){
-  var XHTML_NS='http://www.w3.org/1999/xhtml';
-  function el(tag,attrs,text){ var n=document.createElementNS(XHTML_NS,tag); if(attrs){for(var k in attrs){n.setAttribute(k,attrs[k]);}} if(text!=null){n.textContent=text;} return n; }
-  function pad(n){return String(n).padStart(2,'0');}
-  function lab(iri, labels){ return labels[iri] || iri.replace(/^.*[#\/]/,''); }
-  function parseTTL(url){ return fetch(url,{headers:{'Accept':'text/turtle,text/plain;q=0.9,*/*;q=0.8'}}).then(r=>{if(!r.ok) throw new Error(r.status+' '+r.statusText); return r.text();}).then(ttl=> new N3.Parser({baseIRI:url}).parse(ttl)); }
-  function index(quads){
-    var byS={}; var labels={};
-    quads.forEach(function(q){
-      var s=q.subject.value,p=q.predicate.value;
-      if(!byS[s]) byS[s]=[]; byS[s].push(q);
-      if(p==='http://www.w3.org/2000/01/rdf-schema#label' && q.object.termType==='Literal'){ labels[s]=q.object.value; }
-    });
-    return {byS:byS,labels:labels};
+  const ONTO = "https://jahid1081.github.io/ties4520-ontology/ontology.ttl#";
+  const IND  = "https://jahid1081.github.io/ties4520-ontology/individuals.ttl#";
+  const RDF  = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+  const RDFS = "http://www.w3.org/2000/01/rdf-schema#";
+
+  const { DataFactory, Parser, Store } = N3;
+  const { namedNode } = DataFactory;
+
+  async function loadStore(ttlUrl){
+    const text = await (await fetch(ttlUrl, {cache:"no-store"})).text();
+    const store = new Store();
+    const parser = new Parser();
+    store.addQuads(parser.parse(text));
+    return store;
   }
-  function firstO(byS, s, p){ var arr=(byS[s]||[]).filter(q=>q.predicate.value===p); return arr.length?arr[0].object:null; }
-  function allO(byS, s, p){ return (byS[s]||[]).filter(q=>q.predicate.value===p).map(q=>q.object); }
-
-  var P = {
-    rdf:'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-    rdfs:'http://www.w3.org/2000/01/rdf-schema#',
-    onto:'https://jahid1081.github.io/ties4520-ontology/ontology.ttl#',
-    ind:'https://jahid1081.github.io/ties4520-ontology/individuals.ttl#'
-  };
-
-  function collectEpisodesForSeries(byS, labels, seriesIRI){
-    var eps=[];
-    Object.keys(byS).forEach(function(s){
-      var po = firstO(byS, s, P.onto+'partOfSeries');
-      if (po && po.termType==='NamedNode' && po.value===seriesIRI){
-        var sn = firstO(byS, s, P.onto+'seasonNumber');
-        var en = firstO(byS, s, P.onto+'episodeNumber');
-        var ss = sn && sn.termType==='Literal' ? parseInt(sn.value,10) : null;
-        var ee = en && en.termType==='Literal' ? parseInt(en.value,10) : null;
-        eps.push({ iri:s, s:ss, e:ee });
-      }
-    });
-    eps.sort(function(a,b){ return ((a.s||0)-(b.s||0)) || ((a.e||0)-(b.e||0)); });
-    return eps;
+  function getOne(store, s, p){
+    const q = store.getQuads(namedNode(s), namedNode(p), null, null);
+    return q.length ? q[0].object : null;
+  }
+  function getAll(store, s, p){
+    return store.getQuads(namedNode(s), namedNode(p), null, null).map(q => q.object);
+  }
+  function str(obj){
+    if(!obj) return null;
+    return (obj.termType === "NamedNode") ? obj.id : obj.value;
+  }
+  function localName(iri){
+    try{ return iri.split("#").pop(); }catch(e){ return iri; }
+  }
+  function titleCase(s){ return (s||"").replace(/[_\-]+/g," ").replace(/\b\w/g,c=>c.toUpperCase()); }
+  function chip(text, href){
+    const a = document.createElement(href?"a":"span");
+    a.className = "chip";
+    a.textContent = text;
+    if(href){ a.href = href; a.target = "_blank"; a.rel = "noopener"; }
+    return a;
+  }
+  function row(label, node){
+    const r = document.createElement("div");
+    r.className = "row";
+    const l = document.createElement("div");
+    l.className = "label"; l.textContent = label;
+    const v = document.createElement("div");
+    v.className = "value";
+    v.appendChild(node);
+    r.append(l,v);
+    return r;
+  }
+  function episodeItem(title, openHref){
+    const li = document.createElement("div");
+    li.className = "item";
+    const a = document.createElement("div");
+    a.textContent = title;
+    const btn = document.createElement("a");
+    btn.className = "btn small";
+    btn.href = openHref;
+    btn.textContent = "Open";
+    li.append(a, btn);
+    return li;
+  }
+  function groupHeader(text){
+    const h = document.createElement("div");
+    h.className = "item group";
+    h.textContent = text;
+    return h;
   }
 
-  window.renderSeriesFull = function(ttlPath, key, topId, listId){
-    var src=ttlPath||'individuals.ttl';
-    var seriesIRI = P.ind + 'Series_' + key;
-    parseTTL(src).then(function(parsed){
-      var qx = index(parsed);
-      // Top area (poster, showrunners, platforms, availability, link)
-      var top = document.getElementById(topId);
-      while (top.firstChild) top.removeChild(top.firstChild);
+  function makeViewerLink(src, iri){
+    const u = new URL("viewer.xhtml", location.href);
+    u.searchParams.set("src", src);
+    u.searchParams.set("iri", iri);
+    return u.href;
+  }
 
-      // poster
-      var posterObj = firstO(qx.byS, seriesIRI, P.onto+'poster');
-      var posterURL = posterObj ? (posterObj.termType==='NamedNode' ? posterObj.value : posterObj.value) : 'img/placeholder.png';
-      var poster = el('div',{'class':'poster'}); poster.appendChild(el('img',{'src':posterURL,'alt':'Poster'}));
+  function extractSeasonEpisode(local){
+    // expects like Series_The_Bear_S01_E07 or similar
+    const m = local.match(/_S(\d+)_E(\d+)$/);
+    if(!m) return {season: 0, episode: 0};
+    return {season: parseInt(m[1],10), episode: parseInt(m[2],10)};
+  }
 
-      var meta = el('div',{'class':'series-meta'});
+  async function renderSeriesFull(ttlUrl, key, topId, listId){
+    const store = await loadStore(ttlUrl);
+    const seriesIRI = IND + "Series_" + key;
 
-      // IRI + label
-      var row0 = el('div',{'class':'row'});
-      row0.appendChild(el('div',{'class':'label'},'IRI:'));
-      row0.appendChild(el('div',{'class':'value'}, 'ind:Series_'+key));
-      meta.appendChild(row0);
+    // Poster from onto:poster
+    let poster = str(getOne(store, seriesIRI, ONTO + "poster"));
 
-      // Showrunners
-      var srs = allO(qx.byS, seriesIRI, P.onto+'hasShowrunner').map(o=>lab(o.value,qx.labels));
-      if (srs.length){
-        var r = el('div',{'class':'row'});
-        r.appendChild(el('div',{'class':'label'},'Showrunner(s):'));
-        var chips = el('div',{'class':'value chips'});
-        srs.forEach(n=>chips.appendChild(el('span',{'class':'chip'},n)));
-        r.appendChild(chips);
-        meta.appendChild(r);
-      }
+    // Label
+    let label = str(getOne(store, seriesIRI, RDFS + "label")) || titleCase(key.replace(/_/g," "));
 
-      // Platforms
-      var home = firstO(qx.byS, seriesIRI, P.onto+'hasHomePlatform');
-      var streams = allO(qx.byS, seriesIRI, P.onto+'streamsOn');
-      if (home || streams.length){
-        var r = el('div',{'class':'row'});
-        r.appendChild(el('div',{'class':'label'},'Platform(s):'));
-        var chips = el('div',{'class':'value chips'});
-        if (home){ chips.appendChild(el('span',{'class':'chip'}, 'Home: '+lab(home.value,qx.labels))); }
-        streams.forEach(p=>chips.appendChild(el('span',{'class':'chip'}, lab(p.value,qx.labels))));
-        r.appendChild(chips);
-        meta.appendChild(r);
-      }
+    // Showrunners
+    const srs = getAll(store, seriesIRI, ONTO + "hasShowrunner");
+    const showrunners = document.createElement("div");
+    showrunners.className = "chips";
+    if(srs.length){
+      srs.forEach(p => {
+        const name = str(getOne(store, p.id || p.value, RDFS+"label")) || titleCase(localName(str(p)));
+        showrunners.appendChild(chip(name));
+      });
+    }else{
+      showrunners.appendChild(chip("—"));
+    }
 
-      // Availability (Region • Platform) from hasAvailability → (region, platform)
-      var avs = allO(qx.byS, seriesIRI, P.onto+'hasAvailability');
-      if (avs.length){
-        var r = el('div',{'class':'row'});
-        r.appendChild(el('div',{'class':'label'},'Availability:'));
-        var chips = el('div',{'class':'value chips'});
-        avs.forEach(function(a){
-          if (a.termType==='NamedNode'){
-            var reg = firstO(qx.byS, a.value, P.onto+'region');
-            var plt = firstO(qx.byS, a.value, P.onto+'platform');
-            var txt = (reg?lab(reg.value,qx.labels):'?') + ' • ' + (plt?lab(plt.value,qx.labels):'?');
-            chips.appendChild(el('span',{'class':'chip'}, txt));
-          }
-        });
-        r.appendChild(chips);
-        meta.appendChild(r);
-      }
-
-      // relatedLink (if present)
-      var link = firstO(qx.byS, seriesIRI, P.onto+'relatedLink');
-      if (link){
-        var r = el('div',{'class':'row'});
-        r.appendChild(el('div',{'class':'label'},'Link:'));
-        var a = el('a',{'class':'btn small','href':link.value,'target':'_blank','rel':'noopener'},'Open');
-        var v = el('div',{'class':'value'}); v.appendChild(a);
-        r.appendChild(v);
-        meta.appendChild(r);
-      }
-
-      top.appendChild(poster); top.appendChild(meta);
-
-      // Episodes for this series
-      var list = document.getElementById(listId);
-      while (list.firstChild) list.removeChild(list.firstChild);
-
-      var eps = collectEpisodesForSeries(qx.byS, qx.labels, seriesIRI);
-      if (!eps.length){
-        list.appendChild(el('div',{'class':'item'},'No episodes found.'));
-      } else {
-        var curS=null;
-        eps.forEach(function(ep){
-          if (ep.s!=null && curS!==ep.s){
-            curS=ep.s;
-            list.appendChild(el('div',{'class':'item group'},'Season '+String(ep.s).padStart(2,'0')));
-          }
-          var row = el('div',{'class':'item'});
-          var href;
-          var frag = ep.iri.indexOf('#')>=0 ? ep.iri.split('#').pop() : null;
-          if (frag){
-            href = 'viewer.xhtml?src=individuals.ttl&id='+encodeURIComponent(frag);
-          } else {
-            href = 'viewer.xhtml?iri='+encodeURIComponent(ep.iri);
-          }
-          var left = el('a',{'class':'btn title-btn','href':href}, (ep.s!=null&&ep.e!=null?('S'+String(ep.s).padStart(2,'0')+' · E'+String(ep.e).padStart(2,'0')):'Episode'));
-
-          // episode chips
-          var chips = el('div',{'class':'chips'});
-          var ad = firstO(qx.byS, ep.iri, P.onto+'airDate'); if (ad && ad.termType==='Literal'){ chips.appendChild(el('span',{'class':'chip'}, ad.value)); }
-          var dirs = allO(qx.byS, ep.iri, P.onto+'hasDirector').map(o=>lab(o.value,qx.labels));
-          if (dirs.length){ chips.appendChild(el('span',{'class':'chip'}, 'Dir: '+dirs.join(', '))); }
-          var wrs = allO(qx.byS, ep.iri, P.onto+'hasWriter').map(o=>lab(o.value,qx.labels));
-          if (wrs.length){ chips.appendChild(el('span',{'class':'chip'}, 'Writ: '+wrs.join(', '))); }
-
-          var leftWrap = el('div',null,null); leftWrap.appendChild(left); leftWrap.appendChild(chips);
-          var openBtn = el('a',{'class':'btn','href':href},'Open');
-          row.appendChild(leftWrap);
-          row.appendChild(openBtn);
-          list.appendChild(row);
-        });
-      }
-    }).catch(function(e){
-      var top = document.getElementById(topId);
-      while (top.firstChild) top.removeChild(top.firstChild);
-      top.appendChild(el('div',{'class':'alert ok'}, 'Error: '+e.message));
+    // Platforms / Home
+    const homes = getAll(store, seriesIRI, ONTO + "hasHomePlatform");
+    const streams = getAll(store, seriesIRI, ONTO + "streamsOn");
+    const plat = document.createElement("div"); plat.className="chips";
+    homes.concat(streams).forEach(p=>{
+      const nm = str(getOne(store, str(p), RDFS+"label")) || titleCase(localName(str(p)));
+      plat.appendChild(chip(nm));
     });
-  };
+
+    // Related link
+    const rl = str(getOne(store, seriesIRI, ONTO + "relatedLink"));
+    const rlWrap = document.createElement("div"); rlWrap.className = "chips";
+    if(rl){ rlWrap.appendChild(chip("Open", rl)); } else { rlWrap.appendChild(chip("—")); }
+
+    // Build top
+    const top = document.getElementById(topId);
+    // poster
+    const posterWrap = document.createElement("div");
+    posterWrap.className = "poster";
+    const img = document.createElement("img");
+    img.alt = "Poster";
+    img.referrerPolicy = "no-referrer";
+    if(poster){ img.src = poster; }
+    posterWrap.appendChild(img);
+    // meta
+    const meta = document.createElement("div");
+    meta.className = "series-meta";
+    const iriBox = document.createElement("code");
+    iriBox.textContent = localName(seriesIRI);
+    meta.appendChild(row("IRI:", iriBox));
+    const lbl = document.createElement("span"); lbl.textContent = label;
+    meta.appendChild(row("Label:", lbl));
+    meta.appendChild(row("Showrunner(s):", showrunners));
+    if(plat.childNodes.length) meta.appendChild(row("Platform(s):", plat));
+    meta.appendChild(row("Link:", rlWrap));
+    top.append(posterWrap, meta);
+
+    // Episodes: ?ep onto:partOfSeries seriesIRI
+    const EP_IN = store.getQuads(null, namedNode(ONTO+"partOfSeries"), namedNode(seriesIRI), null).map(q => q.subject.id);
+    const eps = EP_IN.map(iri => ({ iri, local: localName(iri), se: extractSeasonEpisode(localName(iri)) }));
+    eps.sort((a,b)=> a.se.season - b.se.season || a.se.episode - b.se.episode);
+
+    const list = document.getElementById(listId);
+    let curSeason = -1;
+    eps.forEach(e => {
+      if(e.se.season !== curSeason){
+        curSeason = e.se.season;
+        list.appendChild(groupHeader("Season " + String(curSeason).padStart(2,"0")));
+      }
+      const air = str(getOne(store, e.iri, ONTO + "airDate"));
+      const dir = getAll(store, e.iri, ONTO + "hasDirector").map(x => str(getOne(store, str(x), RDFS+"label")) || titleCase(localName(str(x))));
+      const wri = getAll(store, e.iri, ONTO + "hasWriter").map(x => str(getOne(store, str(x), RDFS+"label")) || titleCase(localName(str(x))));
+
+      const left = document.createElement("div");
+      left.textContent = `S${String(e.se.season).padStart(2,"0")} - E${String(e.se.episode).padStart(2,"0")}`;
+      if(air){ left.appendChild(chip(air)); }
+      if(dir.length){ left.appendChild(chip("Dir: " + dir.join(", "))); }
+      if(wri.length){ left.appendChild(chip("Writ: " + wri.join(", "))); }
+
+      const rowDiv = document.createElement("div");
+      rowDiv.className = "item";
+      rowDiv.appendChild(left);
+      const link = document.createElement("a");
+      link.className = "btn small";
+      link.href = makeViewerLink(ttlUrl, e.iri);
+      link.textContent = "Open";
+      rowDiv.appendChild(link);
+      list.appendChild(rowDiv);
+    });
+  }
+
+  // expose
+  window.renderSeriesFull = renderSeriesFull;
 })();
