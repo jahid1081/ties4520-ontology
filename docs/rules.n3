@@ -1,20 +1,23 @@
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
 @prefix onto: <https://jahid1081.github.io/ties4520-ontology/ontology.ttl#> .
 @prefix ind:  <https://jahid1081.github.io/ties4520-ontology/individuals.ttl#> .
 
-# R1: Showrunner implies person contributedTo the series
+# R1
 { ?S a onto:Series ; onto:hasShowrunner ?P } => { ?P onto:contributedTo ?S } .
 
-# R2: Director of an episode contributes to that episode's series
-{ ?EP a onto:Episode ; onto:hasDirector ?P ; onto:partOfSeries ?S } => { ?P onto:contributedTo ?S } .
+# R2
+{ ?E a onto:Episode ; onto:hasDirector ?P ; onto:partOfSeries ?S } => { ?P onto:contributedTo ?S } .
 
-# R3: Writer of an episode contributes to that episode's series
-{ ?EP a onto:Episode ; onto:hasWriter ?P ; onto:partOfSeries ?S } => { ?P onto:contributedTo ?S } .
+# R3
+{ ?E a onto:Episode ; onto:hasWriter ?P ; onto:partOfSeries ?S } => { ?P onto:contributedTo ?S } .
 
-# R4: Auteur detection — if someone is both writer and director of same ep, that person is an Auteur and linked via hasAuteur
-{ ?EP a onto:Episode ; onto:hasDirector ?P ; onto:hasWriter ?P } => { ?P a onto:Auteur . ?EP onto:hasAuteur ?P } .
+# R4
+{ ?E a onto:Episode ; onto:hasDirector ?P ; onto:hasWriter ?P } => { ?P a onto:Auteur . ?E onto:hasAuteur ?P } .
 
-# R5: Ongoing series — if any episode airDate >= 2024-01-01, mark the series as ongoing
-{ ?EP a onto:Episode ; onto:airDate ?D ; onto:partOfSeries ?S . ?D >= "2024-01-01"^^xsd:date } => { ?S onto:isOngoing true } .
+# R5 (use EYE time builtin instead of ">=")
+{ ?E a onto:Episode ; onto:airDate ?D ; onto:partOfSeries ?S .
+  ?D time:greaterThanOrEqualTo "2024-01-01"^^xsd:date }
+=> { ?S onto:isOngoing true } .
