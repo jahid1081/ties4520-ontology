@@ -1,67 +1,78 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>The Bear</title>
-  <style>
-    :root{--bg:#0b0f16;--panel:#0f1521;--ink:#e8eefc;--muted:#a8b0c2;--accent:#4dd4ff;--line:rgba(255,255,255,.08);--shadow:0 12px 30px rgba(0,0,0,.35);--btnBg:#111a2a;--btnHover:#162238;--chip:#0c1220}
-    html,body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.45 system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    .wrap{max-width:1100px;margin:36px auto;padding:0 20px}
-    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-    h1{margin:0;font-size:26px;display:flex;gap:10px;align-items:center}
-    .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 22px var(--accent)}
-    .btn{appearance:none;border:1px solid var(--line);background:var(--btnBg);color:var(--ink);padding:8px 12px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
-    .btn:hover{background:var(--btnHover);border-color:var(--accent)}
-    .btn.small{padding:6px 10px;border-radius:10px}
-    .actions{display:flex;gap:10px;flex-wrap:wrap}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.1//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:onto="https://jahid1081.github.io/ties4520-ontology/ontology.ttl#" xmlns:ind="https://jahid1081.github.io/ties4520-ontology/individuals.ttl#">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Bear</title>
+    <style>:root{--bg:#0b0f16;--panel:#0f1521;--ink:#e8eefc;--muted:#a8b0c2;--accent:#4dd4ff;--line:rgba(255,255,255,.08);--shadow:0 12px 30px rgba(0,0,0,.35);--btnBg:#111a2a;--btnHover:#162238}
+html,body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.45 system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif}
+.wrap{max-width:1200px;margin:36px auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+h1{margin:0;font-size:26px;display:flex;gap:10px;align-items:center}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 22px var(--accent)}
+.btn{appearance:none;border:1px solid var(--line);background:var(--btnBg);color:var(--ink);padding:8px 12px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+.btn:hover{background:var(--btnHover);border-color:var(--accent)}
+.btn.small{padding:6px 10px;border-radius:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.poster-frame{width:100%;aspect-ratio:2/3;background:#0c1322;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+.poster-frame img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:18px}
+@media (max-width:820px){.grid{grid-template-columns:repeat(2,minmax(220px,1fr))}}
+@media (max-width:520px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.card-body{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.title-btn{font-weight:600}
+.hero{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.meta{flex:1 1 360px;min-width:280px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.label{color:var(--muted);min-width:120px}
+.value{font-weight:600}
+.episodes{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.episodes h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:18px}
+.list{display:block}
+.item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line)}
+.item.group{background:rgba(255,255,255,.03);font-weight:700}
+</style>
+    <script type="text/javascript">//<![CDATA[
+    function goBack(){ history.back(); }
+    //]]></script>
+  </head>
+  <body>
+    <div class="wrap">
 
-    .hero{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
-    .poster-frame{flex:0 0 320px;max-width:100%;aspect-ratio:2/3;background:#0c1322;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
-    .poster-frame img{max-width:100%;max-height:100%;object-fit:contain;display:block}
-    .meta{flex:1 1 360px;min-width:280px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
-    .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-    .label{color:var(--muted);min-width:120px}
-    .value{font-weight:600}
-    .episodes{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-    .episodes h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:18px}
-    .list{display:grid;grid-template-columns:repeat(2,minmax(240px,1fr));gap:0}
-    @media (max-width:700px){.list{grid-template-columns:1fr}}
-    .item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line)}
-    .title-btn{font-weight:600}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <h1><span class="dot"></span>The Bear</h1>
-      <div class="actions">
-        <a class="btn small" href="index.html">Home</a>
-        <a class="btn small" href="shows.xhtml">All Shows</a>
-        <button class="btn small" type="button" onclick="history.back()">Back</button>
-      </div>
-    </header>
-
-    <section class="hero">
-      <div class="poster-frame">
-        <img src="img/the-bear.jpg" alt="The Bear poster"/>
-      </div>
-      <div class="meta">
-        <div class="row"><div class="label">Primary language:</div><div class="value">English</div></div>
-        <div class="row"><div class="label">Rating:</div><div class="value">TV-MA</div></div>
-      </div>
-    </section>
-
-    <section class="episodes">
-      <h2>Seasons & Episodes</h2>
-      <div class="list">
-        <!-- Example items; keep your links -->
-        <div class="item">
-          <a class="btn title-btn" href="viewer.html?iri=https://jahid1081.github.io/ties4520-ontology/docs/individuals.ttl#Series_The_Bear_S01_E01">S01 · E01</a>
-          <a class="btn" href="viewer.html?iri=https://jahid1081.github.io/ties4520-ontology/docs/individuals.ttl#Series_The_Bear_S01_E01">Open</a>
+      <header>
+        <h1><span class="dot"></span>The Bear</h1>
+        <div class="actions">
+          <a class="btn small" href="index.html">Home</a>
+          <a class="btn small" href="shows.xhtml">All Shows</a>
+          <button class="btn small" type="button" onclick="goBack()">Back</button>
         </div>
-      </div>
-    </section>
-  </div>
-</body>
+      </header>
+
+      <section class="hero" about="ind:Series_The_Bear" typeof="onto:Series">
+        <div class="poster-frame">
+          <img src="img/the-bear.jpg" alt="The Bear poster" />
+        </div>
+        <div class="meta">
+          <div class="row"><div class="label">IRI:</div><div class="value"><code>ind:Series_The_Bear</code></div></div>
+          <div class="row"><div class="label">Label:</div><div class="value" property="rdfs:label">The Bear</div></div>
+          <div class="row"><div class="label">Data:</div><div class="value"><a class="btn small" href="individuals.ttl">individuals.ttl</a></div></div>
+        </div>
+      </section>
+
+      <section class="episodes">
+        <h2>Seasons &amp; Episodes</h2>
+        <div class="list" id="ep-list"></div>
+      </section>
+
+      <script type="text/javascript" src="https://unpkg.com/n3@1.17.3/browser/n3.min.js"></script>
+      <script type="text/javascript" src="episodes.js"></script>
+      <script type="text/javascript">//<![CDATA[
+        window.addEventListener('DOMContentLoaded', function(){
+          renderEpisodes("The_Bear", "ep-list", "individuals.ttl");
+        });
+      //]]></script>
+    </div>
+  </body>
 </html>
