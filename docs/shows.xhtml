@@ -34,8 +34,6 @@ h2{font-size:20px;margin:0}
 .badge{margin-left:8px;padding:2px 8px;border-radius:10px;background:rgba(77,212,255,.15);border:1px solid rgba(77,212,255,.3)}
 .alert{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px}
 .alert.ok{background:rgba(100,238,172,.07);border-color:rgba(100,238,172,.35);color:var(--ok)}
-.alert.warn{background:rgba(255,207,102,.07);border-color:rgba(255,207,102,.35);color:var(--warn)}
-.alert.bad{background:rgba(255,107,107,.07);border-color:rgba(255,107,107,.35);color:var(--bad)}
 .panel{background:#0f1521;border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .panel-head{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}
 table{width:100%;border-collapse:collapse}
@@ -53,6 +51,7 @@ tbody tr:nth-child(odd){background:var(--stripe)}
       <header>
         <h1><span class="dot"></span>All Shows <span class="badge" id="countBadge">loading…</span></h1>
         <div class="actions">
+          <a class="btn small" href="index.html">Home</a>
           <button class="btn small" type="button" onclick="goBack()">Back</button>
           <a class="btn small" href="ontology.ttl">Ontology (TTL)</a>
           <a class="btn small" href="individuals.ttl">Individuals (TTL)</a>
