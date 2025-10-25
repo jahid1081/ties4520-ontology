@@ -122,8 +122,7 @@
     "rdfs:":"http://www.w3.org/2000/01/rdf-schema#",
     "xsd:":"http://www.w3.org/2001/XMLSchema#",
     // support both bases so QNames look nice regardless of how data was minted
-    "ind:":"https://jahid1081.github.io/ties4520-ontology/docs/individuals.ttl#",
-    "ind2:":"https://jahid1081.github.io/ties4520-ontology/individuals.ttl#",
+    "ind:":"https://jahid1081.github.io/ties4520-ontology/individuals.ttl#",
     "onto:":"https://jahid1081.github.io/ties4520-ontology/ontology.ttl#"
   };
   const qname = u => {for(const [p,b] of Object.entries(prefixes)){if(u.startsWith(b)) return p+u.slice(b.length);} return "<"+u+">";}
