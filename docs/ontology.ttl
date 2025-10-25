@@ -2,8 +2,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
-@prefix onto: <https://jahid1081.github.io/docs/ontology.ttl#> .
-@prefix ind:  <https://jahid1081.github.io/docs/individuals.ttl#> .
+@prefix onto: <https://jahid1081.github.io/ties4520-ontology/ontology.ttl#> .
+@prefix ind:  <https://jahid1081.github.io/ties4520-ontology/individuals.ttl#> .
+
 
 onto: a owl:Ontology ;
   rdfs:label "TV / Streaming Series Ontology (Expanded)" ;
