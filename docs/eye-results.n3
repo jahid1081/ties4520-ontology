@@ -1,0 +1,8 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix onto: <https://jahid1081.github.io/docs/ontology.ttl#> .
+@prefix ind:  <https://jahid1081.github.io/docs/individuals.ttl#> .
+
+# Placeholder: run EYE locally to regenerate complete results
+# eye docs/individuals.ttl docs/rules.n3 --n3 > docs/eye-results.n3

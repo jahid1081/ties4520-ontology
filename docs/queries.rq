@@ -1,0 +1,49 @@
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX onto: <https://jahid1081.github.io/docs/ontology.ttl#>
+PREFIX ind:  <https://jahid1081.github.io/docs/individuals.ttl#>
+
+# Q1. List all series
+SELECT ?series ?label WHERE {
+  ?series a onto:Series ; rdfs:label ?label .
+} ORDER BY ?label
+
+# Q2. Episodes with title/date/credits (no blanks)
+SELECT ?seriesLabel ?seasonNo ?epNo ?epLabel ?air ?directorLabel ?writerLabel WHERE {
+  ?s a onto:Series ; rdfs:label ?seriesLabel ; onto:hasSeason ?season .
+  ?season onto:seasonNumber ?seasonNo ; onto:hasEpisode ?ep .
+  ?ep rdfs:label ?epLabel ; onto:episodeNumber ?epNo ; onto:airDate ?air .
+  OPTIONAL { ?ep onto:hasDirector ?d . ?d rdfs:label ?directorLabel . }
+  OPTIONAL { ?ep onto:hasWriter ?w . ?w rdfs:label ?writerLabel . }
+} ORDER BY ?seriesLabel ?seasonNo ?epNo ?directorLabel ?writerLabel
+
+# Q3. Episodes directed by a specific person (example: Christopher Storer)
+SELECT ?seriesLabel ?seasonNo ?epNo ?epLabel WHERE {
+  ?ep a onto:Episode ; rdfs:label ?epLabel ; onto:episodeNumber ?epNo ;
+      onto:hasDirector ind:Person_Christopher_Storer ;
+      onto:partOfSeries ?s .
+  ?s rdfs:label ?seriesLabel ; onto:hasSeason ?season .
+  ?season onto:hasEpisode ?ep ; onto:seasonNumber ?seasonNo .
+} ORDER BY ?seriesLabel ?seasonNo ?epNo
+
+# Q4. Platforms per region (availability mappings)
+SELECT ?seriesLabel ?region ?platform WHERE {
+  ?s a onto:Series ; rdfs:label ?seriesLabel ; onto:hasAvailability ?a .
+  ?a onto:region ?r ; onto:platform ?p .
+  ?r rdfs:label ?region .
+  ?p rdfs:label ?platform .
+} ORDER BY ?seriesLabel ?region ?platform
+
+# Q5. Showrunners per series
+SELECT ?seriesLabel ?showrunner WHERE {
+  ?s a onto:Series ; rdfs:label ?seriesLabel ; onto:hasShowrunner ?p .
+  ?p rdfs:label ?showrunner .
+} ORDER BY ?seriesLabel ?showrunner
+
+# Q6. All contributors to each series (from rules inference file)
+SELECT ?seriesLabel ?person WHERE {
+  GRAPH ?g { ?person onto:contributedTo ?s }
+  ?s a onto:Series ; rdfs:label ?seriesLabel .
+} ORDER BY ?seriesLabel ?person

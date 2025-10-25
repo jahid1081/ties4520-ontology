@@ -1,0 +1,106 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix onto: <https://jahid1081.github.io/docs/ontology.ttl#> .
+@prefix ind:  <https://jahid1081.github.io/docs/individuals.ttl#> .
+
+onto: a owl:Ontology ;
+  rdfs:label "TV / Streaming Series Ontology (Expanded)" ;
+  rdfs:comment "Meets course checklist: ≥20 classes; union/intersection/complement; enumeration; restrictions; ≥7 object props (incl. functional & inverse-functional & inverses); ≥7 datatype props; disjointness." ;
+  owl:versionInfo "2.0" .
+
+# --- Classes (≥20) ---
+onto:Thing a owl:Class .
+onto:Series a owl:Class .
+onto:Season a owl:Class .
+onto:Episode a owl:Class .
+onto:Person a owl:Class .
+onto:Actor a owl:Class ; rdfs:subClassOf onto:Person .
+onto:Director a owl:Class ; rdfs:subClassOf onto:Person .
+onto:Writer a owl:Class ; rdfs:subClassOf onto:Person .
+onto:Showrunner a owl:Class ; rdfs:subClassOf onto:Person .
+onto:Auteur a owl:Class ; rdfs:subClassOf onto:Person .
+onto:Credit a owl:Class .
+onto:Platform a owl:Class .
+onto:Region a owl:Class .
+onto:Availability a owl:Class .
+onto:Identifier a owl:Class .
+onto:ContentRating a owl:Class .
+onto:Language a owl:Class .
+onto:Release a owl:Class .
+onto:Award a owl:Class .
+onto:Franchise a owl:Class .
+onto:Contributor a owl:Class ; rdfs:subClassOf onto:Person .
+
+# --- Disjointness ---
+onto:Director owl:disjointWith onto:Platform, onto:Region .
+
+# --- Union / Intersection / Complement ---
+onto:Creator a owl:Class ;
+  owl:equivalentClass [ a owl:Class ; owl:unionOf ( onto:Director onto:Writer onto:Showrunner ) ] .
+
+onto:VisualContributor a owl:Class ;
+  owl:equivalentClass [ a owl:Class ; owl:unionOf ( onto:Director onto:Actor ) ] .
+
+onto:NonCreator a owl:Class ;
+  owl:equivalentClass [ a owl:Class ;
+    owl:intersectionOf ( onto:Person [ a owl:Class ; owl:complementOf onto:Creator ] )
+  ] .
+
+# --- Enumerated class example ---
+onto:EU_Region a owl:Class ;
+  owl:equivalentClass [ a owl:Class ; owl:oneOf ( ind:Region_EU ) ] .
+
+# --- Object properties (≥7; incl functional & inverse-functional & inverses) ---
+onto:hasSeason a owl:ObjectProperty ; rdfs:domain onto:Series ; rdfs:range onto:Season .
+onto:isSeasonOf a owl:ObjectProperty ; owl:inverseOf onto:hasSeason ; rdfs:domain onto:Season ; rdfs:range onto:Series .
+
+onto:hasEpisode a owl:ObjectProperty ; rdfs:domain onto:Season ; rdfs:range onto:Episode .
+onto:isEpisodeOf a owl:ObjectProperty ; owl:inverseOf onto:hasEpisode ; rdfs:domain onto:Episode ; rdfs:range onto:Season .
+
+onto:partOfSeries a owl:ObjectProperty ; rdfs:domain [ owl:unionOf ( onto:Season onto:Episode ) ] ; rdfs:range onto:Series .
+
+onto:hasDirector a owl:ObjectProperty ; rdfs:domain onto:Episode ; rdfs:range onto:Director .
+onto:hasWriter a owl:ObjectProperty ; rdfs:domain onto:Episode ; rdfs:range onto:Writer .
+onto:hasShowrunner a owl:ObjectProperty ; rdfs:domain onto:Series ; rdfs:range onto:Showrunner .
+
+onto:hasAuteur a owl:ObjectProperty ; rdfs:domain onto:Episode ; rdfs:range onto:Auteur .
+
+onto:hasAvailability a owl:ObjectProperty ; rdfs:domain onto:Series ; rdfs:range onto:Availability .
+onto:region a owl:ObjectProperty ; rdfs:domain onto:Availability ; rdfs:range onto:Region .
+onto:platform a owl:ObjectProperty ; rdfs:domain onto:Availability ; rdfs:range onto:Platform .
+onto:streamsOn a owl:ObjectProperty ; rdfs:domain onto:Series ; rdfs:range onto:Platform .
+
+# Functional + inverse-functional inverse pair
+onto:hasHomePlatform a owl:ObjectProperty , owl:FunctionalProperty ;
+  rdfs:domain onto:Series ; rdfs:range onto:Platform .
+onto:isHomeForSeries a owl:ObjectProperty , owl:InverseFunctionalProperty ;
+  owl:inverseOf onto:hasHomePlatform ; rdfs:domain onto:Platform ; rdfs:range onto:Series .
+
+# Episode identifier (inverse-functional)
+onto:hasEpisodeIdentifier a owl:ObjectProperty , owl:InverseFunctionalProperty ;
+  rdfs:domain onto:Episode ; rdfs:range onto:Identifier .
+
+onto:contributedTo a owl:ObjectProperty ; rdfs:domain onto:Person ; rdfs:range onto:Series .
+
+# --- Datatype properties (≥7) ---
+onto:seasonNumber a owl:DatatypeProperty ; rdfs:domain onto:Season ; rdfs:range xsd:integer .
+onto:episodeNumber a owl:DatatypeProperty ; rdfs:domain onto:Episode ; rdfs:range xsd:integer .
+onto:airDate a owl:DatatypeProperty ; rdfs:domain onto:Episode ; rdfs:range xsd:date .
+onto:poster a owl:DatatypeProperty ; rdfs:domain onto:Series ; rdfs:range xsd:anyURI .
+onto:relatedLink a owl:DatatypeProperty ; rdfs:domain [ owl:unionOf ( onto:Series onto:Season onto:Episode ) ] ; rdfs:range xsd:anyURI .
+onto:countryCode a owl:DatatypeProperty ; rdfs:domain onto:Region ; rdfs:range xsd:string .
+onto:isOngoing a owl:DatatypeProperty ; rdfs:domain onto:Series ; rdfs:range xsd:boolean .
+
+# --- Restrictions ---
+onto:Episode rdfs:subClassOf
+  [ a owl:Restriction ; owl:onProperty onto:episodeNumber ; owl:cardinality "1"^^xsd:nonNegativeInteger ],
+  [ a owl:Restriction ; owl:onProperty onto:hasWriter ; owl:minCardinality "1"^^xsd:nonNegativeInteger ],
+  [ a owl:Restriction ; owl:onProperty onto:hasDirector ; owl:minCardinality "1"^^xsd:nonNegativeInteger ] .
+
+onto:Season rdfs:subClassOf
+  [ a owl:Restriction ; owl:onProperty onto:seasonNumber ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
+onto:Series rdfs:subClassOf
+  [ a owl:Restriction ; owl:onProperty onto:hasSeason ; owl:minCardinality "1"^^xsd:nonNegativeInteger ] .

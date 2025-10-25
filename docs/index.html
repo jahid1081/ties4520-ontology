@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:;">
+    <link rel="stylesheet" href="styles.css"/>
+    <title>TV Knowledge Graph · Starter</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="brand"><div class="dot"></div><h1>TV Knowledge Graph</h1></div>
+        <div class="actions">
+          <a class="btn" href="shows.xhtml">All Shows (XHTML+RDFa)</a>
+          <a class="btn" href="individuals.ttl">Individuals (TTL)</a>
+          <a class="btn" href="ontology.ttl">Ontology (TTL)</a>
+          <a class="btn" href="rules.n3">Rules (N3)</a>
+        </div>
+      </header>
+      <div class="grid">
+
+        <article class="card">
+          <a href="poker-face.xhtml">
+            <img src="img/poker-face.jpg" alt="Poker Face poster" loading="lazy"/>
+            <div class="meta">
+              <span class="title">Poker Face</span>
+              <a class="badge" href="poker-face.xhtml" aria-label="Open Poker Face">Open</a>
+            </div>
+          </a>
+        </article>
+    
+        <article class="card">
+          <a href="the-bear.xhtml">
+            <img src="img/the-bear.jpg" alt="The Bear poster" loading="lazy"/>
+            <div class="meta">
+              <span class="title">The Bear</span>
+              <a class="badge" href="the-bear.xhtml" aria-label="Open The Bear">Open</a>
+            </div>
+          </a>
+        </article>
+    
+        <article class="card">
+          <a href="the-boys.xhtml">
+            <img src="img/the-boys.jpg" alt="The Boys poster" loading="lazy"/>
+            <div class="meta">
+              <span class="title">The Boys</span>
+              <a class="badge" href="the-boys.xhtml" aria-label="Open The Boys">Open</a>
+            </div>
+          </a>
+        </article>
+    
+      </div>
+      <hr/>
+      <p class="small">Triples: <kbd>docs/individuals.ttl</kbd> · Ontology: <kbd>docs/ontology.ttl</kbd> · Queries: <kbd>docs/queries.rq</kbd></p>
+      <footer class="footer">© 2025</footer>
+    </div>
+  </body>
+</html>

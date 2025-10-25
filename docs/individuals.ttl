@@ -1,0 +1,543 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix onto: <https://jahid1081.github.io/docs/ontology.ttl#> .
+@prefix ind:  <https://jahid1081.github.io/docs/individuals.ttl#> .
+
+ind:Region_US a onto:Region ; rdfs:label "US" ; onto:countryCode "US" .
+ind:Region_UK a onto:Region ; rdfs:label "UK" ; onto:countryCode "UK" .
+ind:Region_EU a onto:Region ; rdfs:label "EU" ; onto:countryCode "EU" .
+ind:Platform_Peacock a onto:Platform ; rdfs:label "Peacock" .
+ind:Platform_Prime_Video a onto:Platform ; rdfs:label "Prime Video" .
+ind:Platform_Hulu a onto:Platform ; rdfs:label "Hulu" .
+ind:Platform_Disney a onto:Platform ; rdfs:label "Disney+" .
+ind:Platform_Sky_Max a onto:Platform ; rdfs:label "Sky Max" .
+ind:Platform_NOW a onto:Platform ; rdfs:label "NOW" .
+ind:Platform_SkyShowtime a onto:Platform ; rdfs:label "SkyShowtime" .
+ind:Person_Adam_Arkin a onto:Person , onto:Director ; rdfs:label "Adam Arkin" .
+ind:Person_Alex_Graves a onto:Person , onto:Director ; rdfs:label "Alex Graves" .
+ind:Person_Alex_Russell a onto:Person , onto:Writer ; rdfs:label "Alex Russell" .
+ind:Person_Alice_Ju a onto:Person , onto:Writer ; rdfs:label "Alice Ju" .
+ind:Person_Anne_Cofell_Saunders a onto:Person , onto:Writer ; rdfs:label "Anne Cofell Saunders" .
+ind:Person_Anslem_Richardson a onto:Person , onto:Writer ; rdfs:label "Anslem Richardson" .
+ind:Person_Ayo_Edebiri a onto:Person , onto:Director , onto:Writer ; rdfs:label "Ayo Edebiri" .
+ind:Person_Batan_Silva a onto:Person , onto:Director ; rdfs:label "Batan Silva" .
+ind:Person_Ben_Funes a onto:Person , onto:Writer ; rdfs:label "Ben Funes" .
+ind:Person_Ben_Sinclair a onto:Person , onto:Director ; rdfs:label "Ben Sinclair" .
+ind:Person_CS_Fischer a onto:Person , onto:Writer ; rdfs:label "CS Fischer" .
+ind:Person_Catherine_Schetina a onto:Person , onto:Writer ; rdfs:label "Catherine Schetina" .
+ind:Person_Catriona_McKenzie a onto:Person , onto:Director ; rdfs:label "Catriona McKenzie" .
+ind:Person_Charlie_Peppers a onto:Person , onto:Writer ; rdfs:label "Charlie Peppers" .
+ind:Person_Chris_Downey a onto:Person , onto:Writer ; rdfs:label "Chris Downey" .
+ind:Person_Christine_Boylan a onto:Person , onto:Writer ; rdfs:label "Christine Boylan" .
+ind:Person_Christopher_Storer a onto:Person , onto:Director , onto:Showrunner , onto:Writer ; rdfs:label "Christopher Storer" .
+ind:Person_Courtney_Storer a onto:Person , onto:Writer ; rdfs:label "Courtney Storer" .
+ind:Person_Craig_Rosenberg a onto:Person , onto:Writer ; rdfs:label "Craig Rosenberg" .
+ind:Person_Dan_Attias a onto:Person , onto:Director ; rdfs:label "Dan Attias" .
+ind:Person_Dan_Trachtenberg a onto:Person , onto:Director ; rdfs:label "Dan Trachtenberg" .
+ind:Person_David_Reed a onto:Person , onto:Writer ; rdfs:label "David Reed" .
+ind:Person_Duccio_Fabbri a onto:Person , onto:Director ; rdfs:label "Duccio Fabbri" .
+ind:Person_Ellie_Monahan a onto:Person , onto:Writer ; rdfs:label "Ellie Monahan" .
+ind:Person_Eric_Kripke a onto:Person , onto:Director , onto:Showrunner , onto:Writer ; rdfs:label "Eric Kripke" .
+ind:Person_Fred_Toye a onto:Person , onto:Director ; rdfs:label "Fred Toye" .
+ind:Person_Geoff_Aull a onto:Person , onto:Writer ; rdfs:label "Geoff Aull" .
+ind:Person_George_Mastras a onto:Person , onto:Writer ; rdfs:label "George Mastras" .
+ind:Person_Iain_B_MacDonald a onto:Person , onto:Director ; rdfs:label "Iain B. MacDonald" .
+ind:Person_Iana_Jordan a onto:Person , onto:Writer ; rdfs:label "Iana Jordan" .
+ind:Person_Janicza_Bravo a onto:Person , onto:Director ; rdfs:label "Janicza Bravo" .
+ind:Person_Jennifer_Phang a onto:Person , onto:Director ; rdfs:label "Jennifer Phang" .
+ind:Person_Jessica_Chou a onto:Person , onto:Writer ; rdfs:label "Jessica Chou" .
+ind:Person_Joanna_Calo a onto:Person , onto:Director , onto:Showrunner , onto:Writer ; rdfs:label "Joanna Calo" .
+ind:Person_Joe_Lawson a onto:Person , onto:Writer ; rdfs:label "Joe Lawson" .
+ind:Person_Judalina_Neira a onto:Person , onto:Writer ; rdfs:label "Judalina Neira" .
+ind:Person_Julian_Holmes a onto:Person , onto:Director ; rdfs:label "Julian Holmes" .
+ind:Person_Karen_Gaviola a onto:Person , onto:Director ; rdfs:label "Karen Gaviola" .
+ind:Person_Karen_Joseph_Adcock a onto:Person , onto:Writer ; rdfs:label "Karen Joseph Adcock" .
+ind:Person_Kelly_Galuska a onto:Person , onto:Writer ; rdfs:label "Kelly Galuska" .
+ind:Person_Laura_Deeley a onto:Person , onto:Writer ; rdfs:label "Laura Deeley" .
+ind:Person_Lilla_Zuckerman a onto:Person , onto:Showrunner , onto:Writer ; rdfs:label "Lilla Zuckerman" .
+ind:Person_Lionel_Boyce a onto:Person , onto:Writer ; rdfs:label "Lionel Boyce" .
+ind:Person_Liz_Friedlander a onto:Person , onto:Director ; rdfs:label "Liz Friedlander" .
+ind:Person_Logan_Ritchey a onto:Person , onto:Writer ; rdfs:label "Logan Ritchey" .
+ind:Person_Lucky_McKee a onto:Person , onto:Director ; rdfs:label "Lucky McKee" .
+ind:Person_Matt_Shakman a onto:Person , onto:Director ; rdfs:label "Matt Shakman" .
+ind:Person_Matty_Matheson a onto:Person , onto:Writer ; rdfs:label "Matty Matheson" .
+ind:Person_Meredith_Glynn a onto:Person , onto:Writer ; rdfs:label "Meredith Glynn" .
+ind:Person_Michael_Saltzman a onto:Person , onto:Writer ; rdfs:label "Michael Saltzman" .
+ind:Person_Natasha_Lyonne a onto:Person , onto:Director , onto:Writer ; rdfs:label "Natasha Lyonne" .
+ind:Person_Nelson_Cragg a onto:Person , onto:Director ; rdfs:label "Nelson Cragg" .
+ind:Person_Nora_Zuckerman a onto:Person , onto:Showrunner , onto:Writer ; rdfs:label "Nora Zuckerman" .
+ind:Person_Paul_Grellong a onto:Person , onto:Writer ; rdfs:label "Paul Grellong" .
+ind:Person_Phil_Sgriccia a onto:Person , onto:Director ; rdfs:label "Phil Sgriccia" .
+ind:Person_Ramy_Youssef a onto:Person , onto:Director ; rdfs:label "Ramy Youssef" .
+ind:Person_Rebecca_Sonnenshine a onto:Person , onto:Writer ; rdfs:label "Rebecca Sonnenshine" .
+ind:Person_Rene_Gube a onto:Person , onto:Writer ; rdfs:label "Rene Gube" .
+ind:Person_Rian_Johnson a onto:Person , onto:Director , onto:Writer ; rdfs:label "Rian Johnson" .
+ind:Person_Sarah_Boyd a onto:Person , onto:Director ; rdfs:label "Sarah Boyd" .
+ind:Person_Shana_Stein a onto:Person , onto:Director ; rdfs:label "Shana Stein" .
+ind:Person_Sofya_Levitsky_Weitz a onto:Person , onto:Writer ; rdfs:label "Sofya Levitsky-Weitz" .
+ind:Person_Stacy_Osei_Kuffour a onto:Person , onto:Writer ; rdfs:label "Stacy Osei-Kuffour" .
+ind:Person_Stefan_Schwartz a onto:Person , onto:Director ; rdfs:label "Stefan Schwartz" .
+ind:Person_Steve_Boyum a onto:Person , onto:Director ; rdfs:label "Steve Boyum" .
+ind:Person_Taofik_Kolade a onto:Person , onto:Writer ; rdfs:label "Taofik Kolade" .
+ind:Person_Tiffany_Johnson a onto:Person , onto:Director ; rdfs:label "Tiffany Johnson" .
+ind:Person_Tony_Tost a onto:Person , onto:Showrunner ; rdfs:label "Tony Tost" .
+ind:Person_Will_Guidara a onto:Person , onto:Writer ; rdfs:label "Will Guidara" .
+ind:Person_Wyatt_Cain a onto:Person , onto:Writer ; rdfs:label "Wyatt Cain" .
+ind:Series_Poker_Face a onto:Series ; rdfs:label "Poker Face" ; onto:poster "https://upload.wikimedia.org/wikipedia/en/b/be/Poker_Face_TV_logo.png" ; onto:relatedLink "https://en.wikipedia.org/wiki/Poker_Face_(TV_series)" .
+ind:Series_Poker_Face onto:hasHomePlatform ind:Platform_Peacock .
+ind:Series_Poker_Face onto:hasShowrunner ind:Person_Nora_Zuckerman .
+ind:Series_Poker_Face onto:hasShowrunner ind:Person_Lilla_Zuckerman .
+ind:Series_Poker_Face onto:hasShowrunner ind:Person_Tony_Tost .
+ind:Series_Poker_Face onto:streamsOn ind:Platform_Peacock .
+ind:Series_Poker_Face_Avail_US_Peacock a onto:Availability ; onto:region ind:Region_US ; onto:platform ind:Platform_Peacock .
+ind:Series_Poker_Face onto:hasAvailability ind:Series_Poker_Face_Avail_US_Peacock .
+ind:Series_Poker_Face onto:streamsOn ind:Platform_Sky_Max .
+ind:Series_Poker_Face_Avail_UK_Sky_Max a onto:Availability ; onto:region ind:Region_UK ; onto:platform ind:Platform_Sky_Max .
+ind:Series_Poker_Face onto:hasAvailability ind:Series_Poker_Face_Avail_UK_Sky_Max .
+ind:Series_Poker_Face onto:streamsOn ind:Platform_NOW .
+ind:Series_Poker_Face_Avail_UK_NOW a onto:Availability ; onto:region ind:Region_UK ; onto:platform ind:Platform_NOW .
+ind:Series_Poker_Face onto:hasAvailability ind:Series_Poker_Face_Avail_UK_NOW .
+ind:Series_Poker_Face onto:streamsOn ind:Platform_SkyShowtime .
+ind:Series_Poker_Face_Avail_EU_SkyShowtime a onto:Availability ; onto:region ind:Region_EU ; onto:platform ind:Platform_SkyShowtime .
+ind:Series_Poker_Face onto:hasAvailability ind:Series_Poker_Face_Avail_EU_SkyShowtime .
+ind:Series_Poker_Face_S01 a onto:Season ; rdfs:label "Poker Face Season 1" ; onto:seasonNumber "1"^^xsd:integer ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face onto:hasSeason ind:Series_Poker_Face_S01 .
+ind:Series_Poker_Face_S01_E01 a onto:Episode ; rdfs:label "Dead Man's Hand" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2023-01-26"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E01 .
+ind:Series_Poker_Face_S01_E01 onto:hasDirector ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E01 onto:hasWriter ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E02 a onto:Episode ; rdfs:label "The Night Shift" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2023-01-26"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E02 .
+ind:Series_Poker_Face_S01_E02 onto:hasDirector ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E02 onto:hasWriter ind:Person_Alice_Ju .
+ind:Series_Poker_Face_S01_E03 a onto:Episode ; rdfs:label "The Stall" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2023-01-26"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E03 .
+ind:Series_Poker_Face_S01_E03 onto:hasDirector ind:Person_Iain_B_MacDonald .
+ind:Series_Poker_Face_S01_E03 onto:hasWriter ind:Person_Wyatt_Cain .
+ind:Series_Poker_Face_S01_E04 a onto:Episode ; rdfs:label "Rest in Metal" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2023-02-02"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E04 .
+ind:Series_Poker_Face_S01_E04 onto:hasDirector ind:Person_Tiffany_Johnson .
+ind:Series_Poker_Face_S01_E04 onto:hasWriter ind:Person_Christine_Boylan .
+ind:Series_Poker_Face_S01_E05 a onto:Episode ; rdfs:label "Time of the Monkey" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2023-02-09"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E05 .
+ind:Series_Poker_Face_S01_E05 onto:hasDirector ind:Person_Lucky_McKee .
+ind:Series_Poker_Face_S01_E05 onto:hasWriter ind:Person_Wyatt_Cain .
+ind:Series_Poker_Face_S01_E05 onto:hasWriter ind:Person_Charlie_Peppers .
+ind:Series_Poker_Face_S01_E06 a onto:Episode ; rdfs:label "Exit Stage Death" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2023-02-16"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E06 .
+ind:Series_Poker_Face_S01_E06 onto:hasDirector ind:Person_Ben_Sinclair .
+ind:Series_Poker_Face_S01_E06 onto:hasWriter ind:Person_Chris_Downey .
+ind:Series_Poker_Face_S01_E07 a onto:Episode ; rdfs:label "The Future of the Sport" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2023-02-23"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E07 .
+ind:Series_Poker_Face_S01_E07 onto:hasDirector ind:Person_Iain_B_MacDonald .
+ind:Series_Poker_Face_S01_E07 onto:hasWriter ind:Person_Joe_Lawson .
+ind:Series_Poker_Face_S01_E07 onto:hasWriter ind:Person_CS_Fischer .
+ind:Series_Poker_Face_S01_E08 a onto:Episode ; rdfs:label "The Orpheus Syndrome" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2023-03-02"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E08 .
+ind:Series_Poker_Face_S01_E08 onto:hasDirector ind:Person_Natasha_Lyonne .
+ind:Series_Poker_Face_S01_E08 onto:hasWriter ind:Person_Natasha_Lyonne .
+ind:Series_Poker_Face_S01_E08 onto:hasWriter ind:Person_Alice_Ju .
+ind:Series_Poker_Face_S01_E09 a onto:Episode ; rdfs:label "Escape from Shit Mountain" ; onto:episodeNumber "9"^^xsd:integer ; onto:airDate "2023-03-09"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E09 .
+ind:Series_Poker_Face_S01_E09 onto:hasDirector ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E09 onto:hasWriter ind:Person_Nora_Zuckerman .
+ind:Series_Poker_Face_S01_E09 onto:hasWriter ind:Person_Lilla_Zuckerman .
+ind:Series_Poker_Face_S01_E10 a onto:Episode ; rdfs:label "The Hook" ; onto:episodeNumber "10"^^xsd:integer ; onto:airDate "2023-03-09"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S01 onto:hasEpisode ind:Series_Poker_Face_S01_E10 .
+ind:Series_Poker_Face_S01_E10 onto:hasDirector ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E10 onto:hasWriter ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S02 a onto:Season ; rdfs:label "Poker Face Season 2" ; onto:seasonNumber "2"^^xsd:integer ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face onto:hasSeason ind:Series_Poker_Face_S02 .
+ind:Series_Poker_Face_S02_E01 a onto:Episode ; rdfs:label "The Game Is a Foot" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2025-05-08"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E01 .
+ind:Series_Poker_Face_S02_E01 onto:hasDirector ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S02_E01 onto:hasWriter ind:Person_Laura_Deeley .
+ind:Series_Poker_Face_S02_E02 a onto:Episode ; rdfs:label "Last Looks" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2025-05-08"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E02 .
+ind:Series_Poker_Face_S02_E02 onto:hasDirector ind:Person_Natasha_Lyonne .
+ind:Series_Poker_Face_S02_E02 onto:hasWriter ind:Person_Alice_Ju .
+ind:Series_Poker_Face_S02_E02 onto:hasWriter ind:Person_Natasha_Lyonne .
+ind:Series_Poker_Face_S02_E03 a onto:Episode ; rdfs:label "Whack-A-Mole" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2025-05-08"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E03 .
+ind:Series_Poker_Face_S02_E03 onto:hasDirector ind:Person_Iain_B_MacDonald .
+ind:Series_Poker_Face_S02_E03 onto:hasWriter ind:Person_Wyatt_Cain .
+ind:Series_Poker_Face_S02_E04 a onto:Episode ; rdfs:label "The Taste of Human Blood" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2025-05-15"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E04 .
+ind:Series_Poker_Face_S02_E04 onto:hasDirector ind:Person_Iain_B_MacDonald .
+ind:Series_Poker_Face_S02_E04 onto:hasWriter ind:Person_Nora_Zuckerman .
+ind:Series_Poker_Face_S02_E04 onto:hasWriter ind:Person_Lilla_Zuckerman .
+ind:Series_Poker_Face_S02_E05 a onto:Episode ; rdfs:label "Hometown Hero" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2025-05-22"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E05 .
+ind:Series_Poker_Face_S02_E05 onto:hasDirector ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S02_E05 onto:hasWriter ind:Person_Ben_Funes .
+ind:Series_Poker_Face_S02_E06 a onto:Episode ; rdfs:label "Sloppy Joseph" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2025-05-29"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E06 .
+ind:Series_Poker_Face_S02_E06 onto:hasDirector ind:Person_Ben_Sinclair .
+ind:Series_Poker_Face_S02_E06 onto:hasWriter ind:Person_Wyatt_Cain .
+ind:Series_Poker_Face_S02_E06 onto:hasWriter ind:Person_Charlie_Peppers .
+ind:Series_Poker_Face_S02_E07 a onto:Episode ; rdfs:label "One Last Job" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2025-06-05"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E07 .
+ind:Series_Poker_Face_S02_E07 onto:hasDirector ind:Person_Adam_Arkin .
+ind:Series_Poker_Face_S02_E07 onto:hasWriter ind:Person_Taofik_Kolade .
+ind:Series_Poker_Face_S02_E08 a onto:Episode ; rdfs:label "The Sleazy Georgian" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2025-06-12"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E08 .
+ind:Series_Poker_Face_S02_E08 onto:hasDirector ind:Person_Adam_Arkin .
+ind:Series_Poker_Face_S02_E08 onto:hasWriter ind:Person_Wyatt_Cain .
+ind:Series_Poker_Face_S02_E09 a onto:Episode ; rdfs:label "A New Lease on Death" ; onto:episodeNumber "9"^^xsd:integer ; onto:airDate "2025-06-19"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E09 .
+ind:Series_Poker_Face_S02_E09 onto:hasDirector ind:Person_Natasha_Lyonne .
+ind:Series_Poker_Face_S02_E09 onto:hasWriter ind:Person_Alice_Ju .
+ind:Series_Poker_Face_S02_E10 a onto:Episode ; rdfs:label "The Big Pump" ; onto:episodeNumber "10"^^xsd:integer ; onto:airDate "2025-06-26"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E10 .
+ind:Series_Poker_Face_S02_E10 onto:hasDirector ind:Person_Adam_Arkin .
+ind:Series_Poker_Face_S02_E10 onto:hasWriter ind:Person_Nora_Zuckerman .
+ind:Series_Poker_Face_S02_E10 onto:hasWriter ind:Person_Lilla_Zuckerman .
+ind:Series_Poker_Face_S02_E10 onto:hasWriter ind:Person_Iana_Jordan .
+ind:Series_Poker_Face_S02_E11 a onto:Episode ; rdfs:label "The Day of the Iguana" ; onto:episodeNumber "11"^^xsd:integer ; onto:airDate "2025-07-03"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E11 .
+ind:Series_Poker_Face_S02_E11 onto:hasDirector ind:Person_Janicza_Bravo .
+ind:Series_Poker_Face_S02_E11 onto:hasWriter ind:Person_Natasha_Lyonne .
+ind:Series_Poker_Face_S02_E11 onto:hasWriter ind:Person_Nora_Zuckerman .
+ind:Series_Poker_Face_S02_E12 a onto:Episode ; rdfs:label "The End of the Road" ; onto:episodeNumber "12"^^xsd:integer ; onto:airDate "2025-07-10"^^xsd:date ; onto:partOfSeries ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:hasEpisode ind:Series_Poker_Face_S02_E12 .
+ind:Series_Poker_Face_S02_E12 onto:hasDirector ind:Person_Natasha_Lyonne .
+ind:Series_Poker_Face_S02_E12 onto:hasWriter ind:Person_Laura_Deeley .
+ind:Series_The_Bear a onto:Series ; rdfs:label "The Bear" ; onto:poster "https://upload.wikimedia.org/wikipedia/en/5/5e/The_Bear_TV_series_title_card.png" ; onto:relatedLink "https://en.wikipedia.org/wiki/The_Bear_(TV_series)" .
+ind:Series_The_Bear onto:hasHomePlatform ind:Platform_Hulu .
+ind:Series_The_Bear onto:hasShowrunner ind:Person_Christopher_Storer .
+ind:Series_The_Bear onto:hasShowrunner ind:Person_Joanna_Calo .
+ind:Series_The_Bear onto:streamsOn ind:Platform_Hulu .
+ind:Series_The_Bear_Avail_US_Hulu a onto:Availability ; onto:region ind:Region_US ; onto:platform ind:Platform_Hulu .
+ind:Series_The_Bear onto:hasAvailability ind:Series_The_Bear_Avail_US_Hulu .
+ind:Series_The_Bear onto:streamsOn ind:Platform_Disney .
+ind:Series_The_Bear_Avail_EU_Disney a onto:Availability ; onto:region ind:Region_EU ; onto:platform ind:Platform_Disney .
+ind:Series_The_Bear onto:hasAvailability ind:Series_The_Bear_Avail_EU_Disney .
+ind:Series_The_Bear onto:streamsOn ind:Platform_Disney .
+ind:Series_The_Bear_Avail_UK_Disney a onto:Availability ; onto:region ind:Region_UK ; onto:platform ind:Platform_Disney .
+ind:Series_The_Bear onto:hasAvailability ind:Series_The_Bear_Avail_UK_Disney .
+ind:Series_The_Bear_S01 a onto:Season ; rdfs:label "The Bear Season 1" ; onto:seasonNumber "1"^^xsd:integer ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear onto:hasSeason ind:Series_The_Bear_S01 .
+ind:Series_The_Bear_S01_E01 a onto:Episode ; rdfs:label "System" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E01 .
+ind:Series_The_Bear_S01_E01 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E01 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E02 a onto:Episode ; rdfs:label "Hands" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E02 .
+ind:Series_The_Bear_S01_E02 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E02 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E03 a onto:Episode ; rdfs:label "Brigade" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E03 .
+ind:Series_The_Bear_S01_E03 onto:hasDirector ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S01_E03 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E04 a onto:Episode ; rdfs:label "Dogs" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E04 .
+ind:Series_The_Bear_S01_E04 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E04 onto:hasWriter ind:Person_Sofya_Levitsky_Weitz .
+ind:Series_The_Bear_S01_E05 a onto:Episode ; rdfs:label "Sheridan" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E05 .
+ind:Series_The_Bear_S01_E05 onto:hasDirector ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S01_E05 onto:hasWriter ind:Person_Karen_Joseph_Adcock .
+ind:Series_The_Bear_S01_E06 a onto:Episode ; rdfs:label "Ceres" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E06 .
+ind:Series_The_Bear_S01_E06 onto:hasDirector ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S01_E06 onto:hasWriter ind:Person_Catherine_Schetina .
+ind:Series_The_Bear_S01_E06 onto:hasWriter ind:Person_Rene_Gube .
+ind:Series_The_Bear_S01_E07 a onto:Episode ; rdfs:label "Review" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E07 .
+ind:Series_The_Bear_S01_E07 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E07 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S01_E08 a onto:Episode ; rdfs:label "Braciole" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2022-06-23"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S01 onto:hasEpisode ind:Series_The_Bear_S01_E08 .
+ind:Series_The_Bear_S01_E08 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E08 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S01_E08 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S02 a onto:Season ; rdfs:label "The Bear Season 2" ; onto:seasonNumber "2"^^xsd:integer ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear onto:hasSeason ind:Series_The_Bear_S02 .
+ind:Series_The_Bear_S02_E01 a onto:Episode ; rdfs:label "Beef" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E01 .
+ind:Series_The_Bear_S02_E01 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E01 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E02 a onto:Episode ; rdfs:label "Pasta" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E02 .
+ind:Series_The_Bear_S02_E02 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E02 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S02_E03 a onto:Episode ; rdfs:label "Sundae" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E03 .
+ind:Series_The_Bear_S02_E03 onto:hasDirector ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S02_E03 onto:hasWriter ind:Person_Karen_Joseph_Adcock .
+ind:Series_The_Bear_S02_E03 onto:hasWriter ind:Person_Catherine_Schetina .
+ind:Series_The_Bear_S02_E04 a onto:Episode ; rdfs:label "Honeydew" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E04 .
+ind:Series_The_Bear_S02_E04 onto:hasDirector ind:Person_Ramy_Youssef .
+ind:Series_The_Bear_S02_E04 onto:hasWriter ind:Person_Stacy_Osei_Kuffour .
+ind:Series_The_Bear_S02_E05 a onto:Episode ; rdfs:label "Pop" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E05 .
+ind:Series_The_Bear_S02_E05 onto:hasDirector ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S02_E05 onto:hasWriter ind:Person_Sofya_Levitsky_Weitz .
+ind:Series_The_Bear_S02_E06 a onto:Episode ; rdfs:label "Fishes" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E06 .
+ind:Series_The_Bear_S02_E06 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E06 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S02_E06 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E07 a onto:Episode ; rdfs:label "Forks" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E07 .
+ind:Series_The_Bear_S02_E07 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E07 onto:hasWriter ind:Person_Alex_Russell .
+ind:Series_The_Bear_S02_E08 a onto:Episode ; rdfs:label "Bolognese" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E08 .
+ind:Series_The_Bear_S02_E08 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E08 onto:hasWriter ind:Person_Rene_Gube .
+ind:Series_The_Bear_S02_E09 a onto:Episode ; rdfs:label "Omelette" ; onto:episodeNumber "9"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E09 .
+ind:Series_The_Bear_S02_E09 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E09 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S02_E09 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E10 a onto:Episode ; rdfs:label "The Bear" ; onto:episodeNumber "10"^^xsd:integer ; onto:airDate "2023-06-22"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S02 onto:hasEpisode ind:Series_The_Bear_S02_E10 .
+ind:Series_The_Bear_S02_E10 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S02_E10 onto:hasWriter ind:Person_Kelly_Galuska .
+ind:Series_The_Bear_S03 a onto:Season ; rdfs:label "The Bear Season 3" ; onto:seasonNumber "3"^^xsd:integer ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear onto:hasSeason ind:Series_The_Bear_S03 .
+ind:Series_The_Bear_S03_E01 a onto:Episode ; rdfs:label "Tomorrow" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E01 .
+ind:Series_The_Bear_S03_E01 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E01 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E01 onto:hasWriter ind:Person_Matty_Matheson .
+ind:Series_The_Bear_S03_E02 a onto:Episode ; rdfs:label "Next" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E02 .
+ind:Series_The_Bear_S03_E02 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E02 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E02 onto:hasWriter ind:Person_Courtney_Storer .
+ind:Series_The_Bear_S03_E03 a onto:Episode ; rdfs:label "Doors" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E03 .
+ind:Series_The_Bear_S03_E03 onto:hasDirector ind:Person_Duccio_Fabbri .
+ind:Series_The_Bear_S03_E03 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E03 onto:hasWriter ind:Person_Will_Guidara .
+ind:Series_The_Bear_S03_E04 a onto:Episode ; rdfs:label "Violet" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E04 .
+ind:Series_The_Bear_S03_E04 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E04 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E05 a onto:Episode ; rdfs:label "Children" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E05 .
+ind:Series_The_Bear_S03_E05 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E05 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E06 a onto:Episode ; rdfs:label "Napkins" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E06 .
+ind:Series_The_Bear_S03_E06 onto:hasDirector ind:Person_Ayo_Edebiri .
+ind:Series_The_Bear_S03_E06 onto:hasWriter ind:Person_Catherine_Schetina .
+ind:Series_The_Bear_S03_E07 a onto:Episode ; rdfs:label "Legacy" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E07 .
+ind:Series_The_Bear_S03_E07 onto:hasDirector ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S03_E07 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E08 a onto:Episode ; rdfs:label "Ice Chips" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E08 .
+ind:Series_The_Bear_S03_E08 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E08 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S03_E09 a onto:Episode ; rdfs:label "Apologies" ; onto:episodeNumber "9"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E09 .
+ind:Series_The_Bear_S03_E09 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E09 onto:hasWriter ind:Person_Alex_Russell .
+ind:Series_The_Bear_S03_E10 a onto:Episode ; rdfs:label "Forever" ; onto:episodeNumber "10"^^xsd:integer ; onto:airDate "2024-06-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S03 onto:hasEpisode ind:Series_The_Bear_S03_E10 .
+ind:Series_The_Bear_S03_E10 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S03_E10 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04 a onto:Season ; rdfs:label "The Bear Season 4" ; onto:seasonNumber "4"^^xsd:integer ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear onto:hasSeason ind:Series_The_Bear_S04 .
+ind:Series_The_Bear_S04_E01 a onto:Episode ; rdfs:label "Groundhogs" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E01 .
+ind:Series_The_Bear_S04_E01 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E01 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E02 a onto:Episode ; rdfs:label "Soubise" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E02 .
+ind:Series_The_Bear_S04_E02 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E02 onto:hasDirector ind:Person_Duccio_Fabbri .
+ind:Series_The_Bear_S04_E02 onto:hasWriter ind:Person_Catherine_Schetina .
+ind:Series_The_Bear_S04_E03 a onto:Episode ; rdfs:label "Scallop" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E03 .
+ind:Series_The_Bear_S04_E03 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E03 onto:hasWriter ind:Person_Rene_Gube .
+ind:Series_The_Bear_S04_E04 a onto:Episode ; rdfs:label "Worms" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E04 .
+ind:Series_The_Bear_S04_E04 onto:hasDirector ind:Person_Janicza_Bravo .
+ind:Series_The_Bear_S04_E04 onto:hasWriter ind:Person_Ayo_Edebiri .
+ind:Series_The_Bear_S04_E04 onto:hasWriter ind:Person_Lionel_Boyce .
+ind:Series_The_Bear_S04_E05 a onto:Episode ; rdfs:label "Replicants" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E05 .
+ind:Series_The_Bear_S04_E05 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E05 onto:hasWriter ind:Person_Karen_Joseph_Adcock .
+ind:Series_The_Bear_S04_E06 a onto:Episode ; rdfs:label "Sophie" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E06 .
+ind:Series_The_Bear_S04_E06 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E06 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E07 a onto:Episode ; rdfs:label "Bears" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E07 .
+ind:Series_The_Bear_S04_E07 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E07 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S04_E08 a onto:Episode ; rdfs:label "Green" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E08 .
+ind:Series_The_Bear_S04_E08 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E08 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S04_E08 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E09 a onto:Episode ; rdfs:label "Tonnato" ; onto:episodeNumber "9"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E09 .
+ind:Series_The_Bear_S04_E09 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E09 onto:hasWriter ind:Person_Joanna_Calo .
+ind:Series_The_Bear_S04_E09 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E10 a onto:Episode ; rdfs:label "Goodbye" ; onto:episodeNumber "10"^^xsd:integer ; onto:airDate "2025-06-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Bear .
+ind:Series_The_Bear_S04 onto:hasEpisode ind:Series_The_Bear_S04_E10 .
+ind:Series_The_Bear_S04_E10 onto:hasDirector ind:Person_Christopher_Storer .
+ind:Series_The_Bear_S04_E10 onto:hasWriter ind:Person_Christopher_Storer .
+ind:Series_The_Boys a onto:Series ; rdfs:label "The Boys" ; onto:poster "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/The_Boys_logo.svg/512px-The_Boys_logo.svg.png" ; onto:relatedLink "https://en.wikipedia.org/wiki/The_Boys_(TV_series)" .
+ind:Series_The_Boys onto:hasHomePlatform ind:Platform_Prime_Video .
+ind:Series_The_Boys onto:hasShowrunner ind:Person_Eric_Kripke .
+ind:Series_The_Boys onto:streamsOn ind:Platform_Prime_Video .
+ind:Series_The_Boys_Avail_US_Prime_Video a onto:Availability ; onto:region ind:Region_US ; onto:platform ind:Platform_Prime_Video .
+ind:Series_The_Boys onto:hasAvailability ind:Series_The_Boys_Avail_US_Prime_Video .
+ind:Series_The_Boys onto:streamsOn ind:Platform_Prime_Video .
+ind:Series_The_Boys_Avail_EU_Prime_Video a onto:Availability ; onto:region ind:Region_EU ; onto:platform ind:Platform_Prime_Video .
+ind:Series_The_Boys onto:hasAvailability ind:Series_The_Boys_Avail_EU_Prime_Video .
+ind:Series_The_Boys onto:streamsOn ind:Platform_Prime_Video .
+ind:Series_The_Boys_Avail_UK_Prime_Video a onto:Availability ; onto:region ind:Region_UK ; onto:platform ind:Platform_Prime_Video .
+ind:Series_The_Boys onto:hasAvailability ind:Series_The_Boys_Avail_UK_Prime_Video .
+ind:Series_The_Boys_S01 a onto:Season ; rdfs:label "The Boys Season 1" ; onto:seasonNumber "1"^^xsd:integer ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys onto:hasSeason ind:Series_The_Boys_S01 .
+ind:Series_The_Boys_S01_E01 a onto:Episode ; rdfs:label "The Name of the Game" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E01 .
+ind:Series_The_Boys_S01_E01 onto:hasDirector ind:Person_Dan_Trachtenberg .
+ind:Series_The_Boys_S01_E01 onto:hasWriter ind:Person_Eric_Kripke .
+ind:Series_The_Boys_S01_E02 a onto:Episode ; rdfs:label "Cherry" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E02 .
+ind:Series_The_Boys_S01_E02 onto:hasDirector ind:Person_Matt_Shakman .
+ind:Series_The_Boys_S01_E02 onto:hasWriter ind:Person_Eric_Kripke .
+ind:Series_The_Boys_S01_E03 a onto:Episode ; rdfs:label "Get Some" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E03 .
+ind:Series_The_Boys_S01_E03 onto:hasDirector ind:Person_Phil_Sgriccia .
+ind:Series_The_Boys_S01_E03 onto:hasWriter ind:Person_George_Mastras .
+ind:Series_The_Boys_S01_E04 a onto:Episode ; rdfs:label "The Female of the Species" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E04 .
+ind:Series_The_Boys_S01_E04 onto:hasDirector ind:Person_Fred_Toye .
+ind:Series_The_Boys_S01_E04 onto:hasWriter ind:Person_Craig_Rosenberg .
+ind:Series_The_Boys_S01_E05 a onto:Episode ; rdfs:label "Good for the Soul" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E05 .
+ind:Series_The_Boys_S01_E05 onto:hasDirector ind:Person_Stefan_Schwartz .
+ind:Series_The_Boys_S01_E05 onto:hasWriter ind:Person_Anne_Cofell_Saunders .
+ind:Series_The_Boys_S01_E06 a onto:Episode ; rdfs:label "The Innocents" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E06 .
+ind:Series_The_Boys_S01_E06 onto:hasDirector ind:Person_Jennifer_Phang .
+ind:Series_The_Boys_S01_E06 onto:hasWriter ind:Person_Rebecca_Sonnenshine .
+ind:Series_The_Boys_S01_E07 a onto:Episode ; rdfs:label "The Self-Preservation Society" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E07 .
+ind:Series_The_Boys_S01_E07 onto:hasDirector ind:Person_Dan_Attias .
+ind:Series_The_Boys_S01_E07 onto:hasWriter ind:Person_Craig_Rosenberg .
+ind:Series_The_Boys_S01_E07 onto:hasWriter ind:Person_Ellie_Monahan .
+ind:Series_The_Boys_S01_E08 a onto:Episode ; rdfs:label "You Found Me" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2019-07-26"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S01 onto:hasEpisode ind:Series_The_Boys_S01_E08 .
+ind:Series_The_Boys_S01_E08 onto:hasDirector ind:Person_Eric_Kripke .
+ind:Series_The_Boys_S01_E08 onto:hasWriter ind:Person_Anne_Cofell_Saunders .
+ind:Series_The_Boys_S01_E08 onto:hasWriter ind:Person_Rebecca_Sonnenshine .
+ind:Series_The_Boys_S02 a onto:Season ; rdfs:label "The Boys Season 2" ; onto:seasonNumber "2"^^xsd:integer ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys onto:hasSeason ind:Series_The_Boys_S02 .
+ind:Series_The_Boys_S02_E01 a onto:Episode ; rdfs:label "The Big Ride" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2020-09-04"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E01 .
+ind:Series_The_Boys_S02_E01 onto:hasDirector ind:Person_Phil_Sgriccia .
+ind:Series_The_Boys_S02_E01 onto:hasWriter ind:Person_Eric_Kripke .
+ind:Series_The_Boys_S02_E02 a onto:Episode ; rdfs:label "Proper Preparation and Planning" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2020-09-04"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E02 .
+ind:Series_The_Boys_S02_E02 onto:hasDirector ind:Person_Liz_Friedlander .
+ind:Series_The_Boys_S02_E02 onto:hasWriter ind:Person_Rebecca_Sonnenshine .
+ind:Series_The_Boys_S02_E03 a onto:Episode ; rdfs:label "Over the Hill with the Swords of a Thousand Men" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2020-09-04"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E03 .
+ind:Series_The_Boys_S02_E03 onto:hasDirector ind:Person_Steve_Boyum .
+ind:Series_The_Boys_S02_E03 onto:hasWriter ind:Person_Craig_Rosenberg .
+ind:Series_The_Boys_S02_E04 a onto:Episode ; rdfs:label "Nothing Like It in the World" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2020-09-11"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E04 .
+ind:Series_The_Boys_S02_E04 onto:hasDirector ind:Person_Fred_Toye .
+ind:Series_The_Boys_S02_E04 onto:hasWriter ind:Person_Michael_Saltzman .
+ind:Series_The_Boys_S02_E05 a onto:Episode ; rdfs:label "We Gotta Go Now" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2020-09-18"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E05 .
+ind:Series_The_Boys_S02_E05 onto:hasDirector ind:Person_Batan_Silva .
+ind:Series_The_Boys_S02_E05 onto:hasWriter ind:Person_Ellie_Monahan .
+ind:Series_The_Boys_S02_E06 a onto:Episode ; rdfs:label "The Bloody Doors Off" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2020-09-25"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E06 .
+ind:Series_The_Boys_S02_E06 onto:hasDirector ind:Person_Sarah_Boyd .
+ind:Series_The_Boys_S02_E06 onto:hasWriter ind:Person_Anslem_Richardson .
+ind:Series_The_Boys_S02_E07 a onto:Episode ; rdfs:label "Butcher, Baker, Candlestick Maker" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2020-10-02"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E07 .
+ind:Series_The_Boys_S02_E07 onto:hasDirector ind:Person_Stefan_Schwartz .
+ind:Series_The_Boys_S02_E07 onto:hasWriter ind:Person_Craig_Rosenberg .
+ind:Series_The_Boys_S02_E08 a onto:Episode ; rdfs:label "What I Know" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2020-10-09"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S02 onto:hasEpisode ind:Series_The_Boys_S02_E08 .
+ind:Series_The_Boys_S02_E08 onto:hasDirector ind:Person_Alex_Graves .
+ind:Series_The_Boys_S02_E08 onto:hasWriter ind:Person_Rebecca_Sonnenshine .
+ind:Series_The_Boys_S03 a onto:Season ; rdfs:label "The Boys Season 3" ; onto:seasonNumber "3"^^xsd:integer ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys onto:hasSeason ind:Series_The_Boys_S03 .
+ind:Series_The_Boys_S03_E01 a onto:Episode ; rdfs:label "Payback" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2022-06-03"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E01 .
+ind:Series_The_Boys_S03_E01 onto:hasDirector ind:Person_Phil_Sgriccia .
+ind:Series_The_Boys_S03_E01 onto:hasWriter ind:Person_Craig_Rosenberg .
+ind:Series_The_Boys_S03_E02 a onto:Episode ; rdfs:label "The Only Man in the Sky" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2022-06-03"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E02 .
+ind:Series_The_Boys_S03_E02 onto:hasDirector ind:Person_Phil_Sgriccia .
+ind:Series_The_Boys_S03_E02 onto:hasWriter ind:Person_David_Reed .
+ind:Series_The_Boys_S03_E03 a onto:Episode ; rdfs:label "Barbary Coast" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2022-06-03"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E03 .
+ind:Series_The_Boys_S03_E03 onto:hasDirector ind:Person_Julian_Holmes .
+ind:Series_The_Boys_S03_E03 onto:hasWriter ind:Person_Anslem_Richardson .
+ind:Series_The_Boys_S03_E03 onto:hasWriter ind:Person_Geoff_Aull .
+ind:Series_The_Boys_S03_E04 a onto:Episode ; rdfs:label "Glorious Five-Year Plan" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2022-06-10"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E04 .
+ind:Series_The_Boys_S03_E04 onto:hasDirector ind:Person_Julian_Holmes .
+ind:Series_The_Boys_S03_E04 onto:hasWriter ind:Person_Meredith_Glynn .
+ind:Series_The_Boys_S03_E05 a onto:Episode ; rdfs:label "The Last Time to Look on This World of Lies" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2022-06-17"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E05 .
+ind:Series_The_Boys_S03_E05 onto:hasDirector ind:Person_Nelson_Cragg .
+ind:Series_The_Boys_S03_E05 onto:hasWriter ind:Person_Ellie_Monahan .
+ind:Series_The_Boys_S03_E06 a onto:Episode ; rdfs:label "Herogasm" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2022-06-24"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E06 .
+ind:Series_The_Boys_S03_E06 onto:hasDirector ind:Person_Nelson_Cragg .
+ind:Series_The_Boys_S03_E06 onto:hasWriter ind:Person_Jessica_Chou .
+ind:Series_The_Boys_S03_E07 a onto:Episode ; rdfs:label "Here Comes a Candle to Light You to Bed" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2022-07-01"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E07 .
+ind:Series_The_Boys_S03_E07 onto:hasDirector ind:Person_Sarah_Boyd .
+ind:Series_The_Boys_S03_E07 onto:hasWriter ind:Person_Paul_Grellong .
+ind:Series_The_Boys_S03_E08 a onto:Episode ; rdfs:label "The Instant White-Hot Wild" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2022-07-08"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S03 onto:hasEpisode ind:Series_The_Boys_S03_E08 .
+ind:Series_The_Boys_S03_E08 onto:hasDirector ind:Person_Sarah_Boyd .
+ind:Series_The_Boys_S03_E08 onto:hasWriter ind:Person_Logan_Ritchey .
+ind:Series_The_Boys_S03_E08 onto:hasWriter ind:Person_David_Reed .
+ind:Series_The_Boys_S04 a onto:Season ; rdfs:label "The Boys Season 4" ; onto:seasonNumber "4"^^xsd:integer ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys onto:hasSeason ind:Series_The_Boys_S04 .
+ind:Series_The_Boys_S04_E01 a onto:Episode ; rdfs:label "Department of Dirty Tricks" ; onto:episodeNumber "1"^^xsd:integer ; onto:airDate "2024-06-13"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E01 .
+ind:Series_The_Boys_S04_E01 onto:hasDirector ind:Person_Phil_Sgriccia .
+ind:Series_The_Boys_S04_E01 onto:hasWriter ind:Person_David_Reed .
+ind:Series_The_Boys_S04_E02 a onto:Episode ; rdfs:label "Life Among the Septics" ; onto:episodeNumber "2"^^xsd:integer ; onto:airDate "2024-06-13"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E02 .
+ind:Series_The_Boys_S04_E02 onto:hasDirector ind:Person_Karen_Gaviola .
+ind:Series_The_Boys_S04_E02 onto:hasWriter ind:Person_Jessica_Chou .
+ind:Series_The_Boys_S04_E03 a onto:Episode ; rdfs:label "We'll Keep the Red Flag Flying Here" ; onto:episodeNumber "3"^^xsd:integer ; onto:airDate "2024-06-13"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E03 .
+ind:Series_The_Boys_S04_E03 onto:hasDirector ind:Person_Fred_Toye .
+ind:Series_The_Boys_S04_E03 onto:hasWriter ind:Person_Ellie_Monahan .
+ind:Series_The_Boys_S04_E04 a onto:Episode ; rdfs:label "Wisdom of the Ages" ; onto:episodeNumber "4"^^xsd:integer ; onto:airDate "2024-06-20"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E04 .
+ind:Series_The_Boys_S04_E04 onto:hasDirector ind:Person_Phil_Sgriccia .
+ind:Series_The_Boys_S04_E04 onto:hasWriter ind:Person_Geoff_Aull .
+ind:Series_The_Boys_S04_E05 a onto:Episode ; rdfs:label "Beware the Jabberwock, My Son" ; onto:episodeNumber "5"^^xsd:integer ; onto:airDate "2024-06-27"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E05 .
+ind:Series_The_Boys_S04_E05 onto:hasDirector ind:Person_Shana_Stein .
+ind:Series_The_Boys_S04_E05 onto:hasWriter ind:Person_Judalina_Neira .
+ind:Series_The_Boys_S04_E06 a onto:Episode ; rdfs:label "Dirty Business" ; onto:episodeNumber "6"^^xsd:integer ; onto:airDate "2024-07-04"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E06 .
+ind:Series_The_Boys_S04_E06 onto:hasDirector ind:Person_Karen_Gaviola .
+ind:Series_The_Boys_S04_E06 onto:hasWriter ind:Person_Anslem_Richardson .
+ind:Series_The_Boys_S04_E07 a onto:Episode ; rdfs:label "The Insider" ; onto:episodeNumber "7"^^xsd:integer ; onto:airDate "2024-07-11"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E07 .
+ind:Series_The_Boys_S04_E07 onto:hasDirector ind:Person_Catriona_McKenzie .
+ind:Series_The_Boys_S04_E07 onto:hasWriter ind:Person_Paul_Grellong .
+ind:Series_The_Boys_S04_E08 a onto:Episode ; rdfs:label "Season Four Finale: Assassination Run" ; onto:episodeNumber "8"^^xsd:integer ; onto:airDate "2024-07-18"^^xsd:date ; onto:partOfSeries ind:Series_The_Boys .
+ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E08 .
+ind:Series_The_Boys_S04_E08 onto:hasDirector ind:Person_Eric_Kripke .
+ind:Series_The_Boys_S04_E08 onto:hasWriter ind:Person_Jessica_Chou .
+ind:Series_The_Boys_S04_E08 onto:hasWriter ind:Person_David_Reed .
