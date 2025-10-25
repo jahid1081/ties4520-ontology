@@ -20,7 +20,7 @@ h2{font-size:20px;margin:0}
 .section{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:22px}
 .section h2{padding:12px 14px;border-bottom:1px solid var(--line)}
 .section-top{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;padding:12px 14px;border-bottom:1px solid var(--line)}
-.poster{width:240px;max-width:35%;min-width:200px;aspect-ratio:2/3;background:#0c1322;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+.poster{width:260px;max-width:35%;min-width:200px;aspect-ratio:2/3;background:#0c1322;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
 .poster img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 .series-meta{flex:1 1 360px;min-width:260px}
 .series-meta .row{display:flex;gap:10px;margin:6px 0}
@@ -34,10 +34,7 @@ h2{font-size:20px;margin:0}
 .badge{margin-left:8px;padding:2px 8px;border-radius:10px;background:rgba(77,212,255,.15);border:1px solid rgba(77,212,255,.3)}
 .alert{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px}
 .alert.ok{background:rgba(100,238,172,.07);border-color:rgba(100,238,172,.35);color:var(--ok)}
-.alert.warn{background:rgba(255,207,102,.07);border-color:rgba(255,207,102,.35);color:var(--warn)}
-.alert.bad{background:rgba(255,107,107,.07);border-color:rgba(255,107,107,.35);color:var(--bad)}
 .panel{background:#0f1521;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.panel-head{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}
 table{width:100%;border-collapse:collapse}
 thead th{position:sticky;top:0;background:rgba(255,255,255,.03);border-bottom:1px solid var(--line);padding:10px 12px;text-align:left}
 tbody td{border-top:1px solid var(--line);padding:10px 12px;vertical-align:top}
@@ -76,7 +73,16 @@ tbody tr:nth-child(odd){background:var(--stripe)}
       <script type="text/javascript" src="https://unpkg.com/n3@1.17.3/browser/n3.min.js"></script>
       <script type="text/javascript" src="viewer-util.js"></script>
       <script type="text/javascript">//<![CDATA[
-        window.addEventListener('DOMContentLoaded', function(){ startViewer('individuals.ttl'); });
+        window.addEventListener('DOMContentLoaded', function(){
+          // Default dataset and subject
+          var p=new URLSearchParams(location.search);
+          var src=p.get('src')||'individuals.ttl';
+          var iri=p.get('iri');
+          var id=p.get('id');
+          var subject = iri || (id ? (new URL(src,location.href).href.replace(/#.*$/,''))+'#'+id : null);
+          document.getElementById('openRaw').setAttribute('href', src);
+          startViewerWithSubject(src, subject);
+        });
       //]]></script>
     </div>
   </body>

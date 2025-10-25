@@ -18,7 +18,6 @@
     });
     return {byS:byS,labels:labels};
   }
-  function params(){ var p=new URLSearchParams(location.search); return { iri:p.get('iri'), src:p.get('src')||'individuals.ttl', id:p.get('id') }; }
   function qname(u){
     if (!u) return '';
     if (u.indexOf(P.onto)===0) return 'onto:'+u.slice(P.onto.length);
@@ -52,13 +51,8 @@
   function firstO(byS, s, p){ var arr=(byS[s]||[]).filter(q=>q.predicate.value===p); return arr.length?arr[0].object:null; }
   function allO(byS, s, p){ return (byS[s]||[]).filter(q=>q.predicate.value===p).map(q=>q.object); }
 
-  window.startViewer = function(defaultSrc){
-    var cfg=params();
-    var src=cfg.src||defaultSrc;
-    var subject = cfg.iri || (cfg.id ? (new URL(src,location.href).href.replace(/#.*$/,''))+'#'+cfg.id : null);
-    if (!subject){ document.getElementById('status').textContent='Missing ?iri= or ?src=&id='; return; }
-    document.getElementById('openRaw').setAttribute('href', src);
-
+  window.startViewerWithSubject = function(src, subject){
+    if (!subject){ var st=document.getElementById('status'); st.className='alert bad'; st.textContent='Missing ?iri= or ?src=&id='; return; }
     parseTTL(src).then(function(parsed){
       var qx=index(parsed);
       document.getElementById('subjectLine').textContent = qname(subject);
@@ -66,62 +60,59 @@
       renderTable(document.getElementById('rows'), rows, qx.labels);
       var st=document.getElementById('status'); st.className='alert ok'; st.textContent='Done.';
 
-      // One-hop expansion: if Episode -> show Series info; if Series -> show Availability & episodes
-      var series = firstO(qx.byS, subject, P.onto+'partOfSeries');
-      var isSeries = (qx.byS[subject]||[]).some(q=>q.predicate.value===P.rdf+'type' && q.object.termType==='NamedNode' && q.object.value===P.onto+'Series');
+      // One-hop: if Episode -> show Series meta; if Series -> show Availability + Episodes
       var oneSec = document.getElementById('oneHopSection');
-      if (series || isSeries){
-        oneSec.style.display='block';
-        var title = document.getElementById('oneHopTitle');
-        var top   = document.getElementById('oneHopTop');
-        var list  = document.getElementById('oneHopList');
-        while(top.firstChild) top.removeChild(top.firstChild);
-        while(list.firstChild) list.removeChild(list.firstChild);
+      var top   = document.getElementById('oneHopTop');
+      var list  = document.getElementById('oneHopList');
+      while(top.firstChild) top.removeChild(top.firstChild);
+      while(list.firstChild) list.removeChild(list.firstChild);
 
-        var sIRI = isSeries ? subject : (series?series.value:null);
-        if (sIRI){
-          title.textContent = (qx.labels[sIRI]||qname(sIRI));
-          var posterObj = firstO(qx.byS, sIRI, P.onto+'poster');
-          var posterURL = posterObj ? (posterObj.termType==='NamedNode' ? posterObj.value : posterObj.value) : 'img/placeholder.png';
-          var poster = el('div',{'class':'poster'}); poster.appendChild(el('img',{'src':posterURL,'alt':'Poster'}));
-          var meta = el('div',{'class':'series-meta'});
+      var isSeries = (qx.byS[subject]||[]).some(q=>q.predicate.value===P.rdf+'type' && q.object.termType==='NamedNode' && q.object.value===P.onto+'Series');
+      var series = firstO(qx.byS, subject, P.onto+'partOfSeries');
+      if (!(isSeries || series)){ oneSec.style.display='none'; return; }
+      oneSec.style.display='block';
+      var sIRI = isSeries ? subject : (series?series.value:null);
+      var labels=qx.labels;
 
-          var sr = allO(qx.byS, sIRI, P.onto+'hasShowrunner').map(o=>qx.labels[o.value]||qname(o.value));
-          if (sr.length){ var r=el('div',{'class':'row'}); r.appendChild(el('div',{'class':'label'},'Showrunner(s):')); var chips=el('div',{'class':'chips'}); sr.forEach(n=>chips.appendChild(el('span',{'class':'chip'},n))); r.appendChild(chips); meta.appendChild(r); }
+      var posterObj = firstO(qx.byS, sIRI, P.onto+'poster');
+      var posterURL = posterObj ? (posterObj.termType==='NamedNode' ? posterObj.value : posterObj.value) : 'img/placeholder.png';
+      var poster = el('div',{'class':'poster'}); poster.appendChild(el('img',{'src':posterURL,'alt':'Poster'}));
+      var meta = el('div',{'class':'series-meta'});
 
-          var home = firstO(qx.byS, sIRI, P.onto+'hasHomePlatform'); var streams = allO(qx.byS, sIRI, P.onto+'streamsOn');
-          if (home || streams.length){ var r=el('div',{'class':'row'}); r.appendChild(el('div',{'class':'label'},'Platform(s):')); var chips=el('div',{'class':'chips'}); if(home){chips.appendChild(el('span',{'class':'chip'},'Home: '+(qx.labels[home.value]||qname(home.value))));} streams.forEach(p=>chips.appendChild(el('span',{'class':'chip'},qx.labels[p.value]||qname(p.value)))); r.appendChild(chips); meta.appendChild(r); }
+      var sr = allO(qx.byS, sIRI, P.onto+'hasShowrunner').map(o=>labels[o.value]||qname(o.value));
+      if (sr.length){ var r=el('div',{'class':'row'}); r.appendChild(el('div',{'class':'label'},'Showrunner(s):')); var chips=el('div',{'class':'chips'}); sr.forEach(n=>chips.appendChild(el('span',{'class':'chip'},n))); r.appendChild(chips); meta.appendChild(r); }
 
-          var av = allO(qx.byS, sIRI, P.onto+'hasAvailability');
-          if (av.length){ var r=el('div',{'class':'row'}); r.appendChild(el('div',{'class':'label'},'Availability:')); var chips=el('div',{'class':'chips'}); av.forEach(function(a){ if(a.termType==='NamedNode'){ var reg=firstO(qx.byS,a.value,P.onto+'region'); var plat=firstO(qx.byS,a.value,P.onto+'platform'); var txt=(reg?(qx.labels[reg.value]||qname(reg.value)):'?')+' • '+(plat?(qx.labels[plat.value]||qname(plat.value)):'?'); chips.appendChild(el('span',{'class':'chip'},txt)); }}); r.appendChild(chips); meta.appendChild(r); }
+      var home = firstO(qx.byS, sIRI, P.onto+'hasHomePlatform'); var streams = allO(qx.byS, sIRI, P.onto+'streamsOn');
+      if (home || streams.length){ var r=el('div',{'class':'row'}); r.appendChild(el('div',{'class':'label'},'Platform(s):')); var chips=el('div',{'class':'chips'}); if(home){chips.appendChild(el('span',{'class':'chip'},'Home: '+(labels[home.value]||qname(home.value))));} streams.forEach(p=>chips.appendChild(el('span',{'class':'chip'},labels[p.value]||qname(p.value)))); r.appendChild(chips); meta.appendChild(r); }
 
-          top.appendChild(poster); top.appendChild(meta);
+      var av = allO(qx.byS, sIRI, P.onto+'hasAvailability');
+      if (av.length){ var r=el('div',{'class':'row'}); r.appendChild(el('div',{'class':'label'},'Availability:')); var chips=el('div',{'class':'chips'}); av.forEach(function(a){ if(a.termType==='NamedNode'){ var reg=firstO(qx.byS,a.value,P.onto+'region'); var plat=firstO(qx.byS,a.value,P.onto+'platform'); var txt=(reg?(labels[reg.value]||qname(reg.value)):'?')+' • '+(plat?(labels[plat.value]||qname(plat.value)):'?'); chips.appendChild(el('span',{'class':'chip'},txt)); }}); r.appendChild(chips); meta.appendChild(r); }
 
-          if (isSeries){
-            // collect episodes that belong to this series via partOfSeries
-            var eps=[];
-            Object.keys(qx.byS).forEach(function(s){
-              var po = firstO(qx.byS, s, P.onto+'partOfSeries');
-              if (po && po.termType==='NamedNode' && po.value===sIRI){
-                var sn = firstO(qx.byS, s, P.onto+'seasonNumber');
-                var en = firstO(qx.byS, s, P.onto+'episodeNumber');
-                var ss = sn && sn.termType==='Literal' ? parseInt(sn.value,10) : null;
-                var ee = en && en.termType==='Literal' ? parseInt(en.value,10) : null;
-                eps.push({iri:s, s:ss, e:ee});
-              }
-            });
-            eps.sort(function(a,b){ return ((a.s||0)-(b.s||0)) || ((a.e||0)-(b.e||0)); });
-            var curS=null;
-            eps.forEach(function(ep){
-              if (ep.s!=null && curS!==ep.s){ curS=ep.s; list.appendChild(el('div',{'class':'item group'},'Season '+String(ep.s).padStart(2,'0'))); }
-              var href='viewer.xhtml?iri='+encodeURIComponent(ep.iri);
-              var row=el('div',{'class':'item'});
-              row.appendChild(el('a',{'class':'btn title-btn','href':href},(ep.s!=null&&ep.e!=null?('S'+String(ep.s).padStart(2,'0')+' · E'+String(ep.e).padStart(2,'0')):(qx.labels[ep.iri]||'Episode'))));
-              row.appendChild(el('a',{'class':'btn','href':href},'Open'));
-              list.appendChild(row);
-            });
+      top.appendChild(poster); top.appendChild(meta);
+
+      // If Series: list episodes by partOfSeries
+      if (isSeries){
+        var eps=[];
+        Object.keys(qx.byS).forEach(function(s){
+          var po = firstO(qx.byS, s, P.onto+'partOfSeries');
+          if (po && po.termType==='NamedNode' && po.value===sIRI){
+            var sn = firstO(qx.byS, s, P.onto+'seasonNumber');
+            var en = firstO(qx.byS, s, P.onto+'episodeNumber');
+            var ss = sn && sn.termType==='Literal' ? parseInt(sn.value,10) : null;
+            var ee = en && en.termType==='Literal' ? parseInt(en.value,10) : null;
+            eps.push({iri:s, s:ss, e:ee});
           }
-        }
+        });
+        eps.sort(function(a,b){ return ((a.s||0)-(b.s||0)) || ((a.e||0)-(b.e||0)); });
+        var curS=null;
+        eps.forEach(function(ep){
+          if (ep.s!=null && curS!==ep.s){ curS=ep.s; list.appendChild(el('div',{'class':'item group'},'Season '+String(ep.s).padStart(2,'0'))); }
+          var href='viewer.xhtml?iri='+encodeURIComponent(ep.iri);
+          var row=el('div',{'class':'item'});
+          row.appendChild(el('a',{'class':'btn title-btn','href':href},(ep.s!=null&&ep.e!=null?('S'+String(ep.s).padStart(2,'0')+' · E'+String(ep.e).padStart(2,'0')):(labels[ep.iri]||'Episode'))));
+          row.appendChild(el('a',{'class':'btn','href':href},'Open'));
+          list.appendChild(row);
+        });
       }
     }).catch(function(e){
       var st=document.getElementById('status'); st.className='alert bad'; st.textContent='Failed: '+e.message;
