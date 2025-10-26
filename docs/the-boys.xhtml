@@ -1,75 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.1//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:onto="https://jahid1081.github.io/ties4520-ontology/ontology.ttl#" xmlns:ind="https://jahid1081.github.io/ties4520-ontology/individuals.ttl#">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      version="XHTML+RDFa 1.1"
+      prefix="
+        rdf:  http://www.w3.org/1999/02/22-rdf-syntax-ns#
+        rdfs: http://www.w3.org/2000/01/rdf-schema#
+        xsd:  http://www.w3.org/2001/XMLSchema#
+        onto: https://jahid1081.github.io/ties4520-ontology/ontology.ttl#
+        ind:  https://jahid1081.github.io/ties4520-ontology/individuals.ttl#
+      ">
   <head>
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Boys • Full Data</title>
-    <style>:root{--bg:#0b0f16;--panel:#0f1521;--ink:#e8eefc;--muted:#a8b0c2;--accent:#4dd4ff;--line:rgba(255,255,255,.08);
---ok:#64eeac;--warn:#ffcf66;--bad:#ff6b6b;--stripe:rgba(255,255,255,.02);--btnBg:#111a2a;--btnHover:#162238;--shadow:0 12px 30px rgba(0,0,0,.35)}
-html,body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.45 system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif}
-.wrap{max-width:1280px;margin:36px auto;padding:0 20px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-h1{margin:0;font-size:26px;display:flex;gap:10px;align-items:center}
-h2{font-size:20px;margin:0}
-.dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 22px var(--accent)}
-.btn{appearance:none;border:1px solid var(--line);background:var(--btnBg);color:var(--ink);padding:8px 12px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
-.btn:hover{background:var(--btnHover);border-color:var(--accent)}
-.btn.small{padding:6px 10px;border-radius:10px}
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.section{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:22px}
-.section h2{padding:12px 14px;border-bottom:1px solid var(--line)}
-.section-top{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;padding:12px 14px;border-bottom:1px solid var(--line)}
-.poster{width:240px;max-width:35%;min-width:200px;aspect-ratio:2/3;background:#0c1322;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
-.poster img{max-width:100%;max-height:100%;object-fit:contain;display:block}
-.series-meta{flex:1 1 360px;min-width:260px}
-.series-meta .row{display:flex;gap:10px;margin:6px 0}
-.series-meta .label{color:var(--muted);min-width:140px}
-.series-meta .value{font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:rgba(255,255,255,.03);color:#c7cfde}
-.list{display:block}
-.item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line)}
-.item.group{background:rgba(255,255,255,.03);font-weight:700}
-.badge{margin-left:8px;padding:2px 8px;border-radius:10px;background:rgba(77,212,255,.15);border:1px solid rgba(77,212,255,.3)}
-.alert{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px}
-.alert.ok{background:rgba(100,238,172,.07);border-color:rgba(100,238,172,.35);color:var(--ok)}
-.panel{background:#0f1521;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.panel-head{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}
-table{width:100%;border-collapse:collapse}
-thead th{position:sticky;top:0;background:rgba(255,255,255,.03);border-bottom:1px solid var(--line);padding:10px 12px;text-align:left}
-tbody td{border-top:1px solid var(--line);padding:10px 12px;vertical-align:top}
-tbody tr:nth-child(odd){background:var(--stripe)}
-.key{color:var(--accent)}code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-</style>
-    <script type="text/javascript">//<![CDATA[
-      function goBack(){ history.back(); }
-    //]]></script>
+    <title>The Boys — From TTL</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <style type="text/css">
+      :root { color-scheme: dark; --bg:#0b0e12; --card:#12161c; --muted:#8aa0b3; --text:#e8eef5; --brand:#6ab0ff; }
+      html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+      .wrap { max-width: 1100px; margin:0 auto; padding:16px; }
+      .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; background:#18202b; border:1px solid #243241; color:var(--text); text-decoration:none; }
+      header { position: sticky; top:0; z-index:10; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(11,14,18,0.9), rgba(11,14,18,0.6) 70%, rgba(11,14,18,0)); border-bottom: 1px solid #1e2733; }
+      .series { background: var(--card); border:1px solid #1a2330; border-radius: 18px; overflow: clip; }
+      .series-head { display:grid; grid-template-columns: 220px 1fr; gap: 16px; padding: 16px; border-bottom:1px solid #1a2330; }
+      .poster-frame { width: 220px; height: 320px; border-radius: 12px; overflow: hidden; background:#0d1117; border:1px solid #1a2330; display:flex; align-items:center; justify-content:center; }
+      .poster-frame img { width:100%; height:100%; object-fit: cover; }
+      .pill { padding:6px 10px; border:1px solid #223144; background:#111620; border-radius:999px; font-size:13px; color:#cfe3ff; margin-right:8px; }
+      .season { border:1px solid #1a2330; border-radius: 14px; padding: 12px; margin: 14px 0; background:#0f141b; }
+      .episodes { display:grid; gap:8px; }
+      .ep { display:grid; grid-template-columns: 70px 1fr; gap: 10px; border:1px solid #1a2330; background:#0c1016; padding: 10px; border-radius: 12px; }
+      .ep-num { font-weight:700; color:#9bb9ff; }
+      .ep-title { margin:0; font-weight:600; }
+      .ep-sub { color:#8aa0b3; font-size:13px; margin-top:2px; }
+    </style>
   </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <h1><span class="dot"></span>The Boys</h1>
-        <div class="actions">
-          <a class="btn small" href="index.html">Home</a>
-          <a class="btn small" href="shows.xhtml">All Shows</a>
-          <a class="btn small" href="ontology.ttl">Ontology</a>
-          <a class="btn small" href="individuals.ttl">Individuals</a>
-          <button class="btn small" type="button" onclick="goBack()">Back</button>
-        </div>
-      </header>
+  <body typeof="rdf:Bag">
+    <header class="wrap">
+      <a class="btn" href="index.html">&#8962; Home</a>
+      <a class="btn" href="shows.xhtml">All Shows</a>
+      <button class="btn" onclick="history.back()">&larr; Back</button>
+    </header>
+    <main class="wrap"><div id="mount"></div></main>
 
-      <section class="section" about="ind:Series_The_Boys" typeof="onto:Series">
-        <h2>Series overview</h2>
-        <div id="seriesTop" class="section-top"></div>
-        <div class="list" id="episodeList"></div>
-      </section>
-
-      <script type="text/javascript" src="https://unpkg.com/n3@1.17.3/browser/n3.min.js"></script>
-      <script type="text/javascript" src="series-page.js"></script>
-      <script type="text/javascript">//<![CDATA[
-        window.addEventListener('DOMContentLoaded', function(){ renderSeriesFull('individuals.ttl','The_Boys','seriesTop','episodeList'); });
-      //]]></script>
-    </div>
+    <script type="module">
+    <![CDATA[
+      import "https://unpkg.com/n3@1.17.4/browser/n3.min.js";
+      const NS={rdf:"http://www.w3.org/1999/02/22-rdf-syntax-ns#",rdfs:"http://www.w3.org/2000/01/rdf-schema#",xsd:"http://www.w3.org/2001/XMLSchema#",onto:"https://jahid1081.github.io/ties4520-ontology/ontology.ttl#",ind:"https://jahid1081.github.io/ties4520-ontology/individuals.ttl#"};
+      const SERIES_IRI = NS.ind + "Series_The_Boys";
+      const TTL=["https://jahid1081.github.io/ties4520-ontology/ontology.ttl","https://jahid1081.github.io/ties4520-ontology/individuals.ttl"];
+      const {Parser,Store,DataFactory}=window.N3; const {namedNode}=DataFactory;
+      const el=(t,a={},x=null)=>{const e=document.createElement(t); for(const k in a)e.setAttribute(k,a[k]); if(x!==null)e.appendChild(document.createTextNode(x)); return e;};
+      function uniq(a){return [...new Set(a)];}
+      function label(st,t){return st.getQuads(t,namedNode(NS.rdfs+"label"),null,null)[0]?.object?.value||t.value;}
+      function lit(st,s,p){return st.getQuads(s,namedNode(p),null,null).map(q=>q.object.value);}
+      function objs(st,s,p){return st.getQuads(s,namedNode(p),null,null).map(q=>q.object);}
+      function int(st,s,p){const o=st.getQuads(s,namedNode(p),null,null)[0]?.object; return o?parseInt(o.value,10):null;}
+      async function load(){const st=new Store(); for(const u of TTL){const txt=await fetch(u,{cache:"no-store"}).then(r=>r.text()); st.addQuads(new Parser({format:"text/turtle"}).parse(txt));} return st;}
+      function seasons(st,series){const viaHas=objs(st,series,NS.onto+"hasSeason"); const viaPart=st.getQuads(null,namedNode(NS.onto+"partOfSeries"),series,null).filter(q=>st.getQuads(q.subject,namedNode(NS.rdf+"type"),namedNode(NS.onto+"Season"),null).length>0).map(q=>q.subject); const list=uniq(viaHas.concat(viaPart).map(t=>t.value)).map(v=>namedNode(v)); return list.filter(s=>(int(st,s,NS.onto+"seasonNumber")||0)>=1).sort((a,b)=>(int(st,a,NS.onto+"seasonNumber")||0)-(int(st,b,NS.onto+"seasonNumber")||0));}
+      function episodes(st,season){const viaHas=objs(st,season,NS.onto+"hasEpisode"); const viaIs=st.getQuads(null,namedNode(NS.onto+"isEpisodeOf"),season,null).map(q=>q.subject); const all=uniq(viaHas.concat(viaIs).map(t=>t.value)).map(v=>namedNode(v)); return all.sort((a,b)=>(int(st,a,NS.onto+"episodeNumber")||0)-(int(st,b,NS.onto+"episodeNumber")||0));}
+      function render(st,s){const m=document.getElementById("mount"); const card=el("section",{class:"series",about:s.value,typeof:"onto:Series"}); const head=el("div",{class:"series-head"}); const pf=el("div",{class:"poster-frame"}); const purl=lit(st,s,NS.onto+"poster")[0]||""; pf.appendChild(el("img",{src:purl,alt:label(st,s)+" poster",property:"onto:poster"})); const meta=el("div",{class:"series-meta"}); meta.appendChild(el("h1",{property:"rdfs:label"},label(st,s)));
+        const pills=[["Language",objs(st,s,NS.onto+"inLanguage").map(t=>label(st,t)).join(", ")],["Rating",objs(st,s,NS.onto+"contentRating").map(t=>label(st,t)).join(", ")],["Showrunner",objs(st,s,NS.onto+"hasShowrunner").map(t=>label(st,t)).join(", ")],["Home",objs(st,s,NS.onto+"hasHomePlatform").map(t=>label(st,t)).join(", ")],["Streams",uniq(objs(st,s,NS.onto+"streamsOn").map(t=>label(st,t))).join(", ")],["Franchise",objs(st,s,NS.onto+"partOfFranchise").map(t=>label(st,t)).join(", ")]];
+        const row=el("div",{}); pills.forEach(([k,v])=>{if(v)row.appendChild(el("span",{class:"pill"},k+": "+v));}); meta.appendChild(row); meta.appendChild(el("a",{class:"btn",href:"viewer.xhtml?subject="+encodeURIComponent(s.value)},"Open in Viewer")); head.appendChild(pf); head.appendChild(meta); card.appendChild(head);
+        const body=el("div",{class:"wrap"}); const avs=objs(st,s,NS.onto+"hasAvailability"); if(avs.length){const avR=el("div",{}); avs.forEach(a=>{const reg=objs(st,a,NS.onto+"region").map(t=>label(st,t))[0]||"Region"; const plat=objs(st,a,NS.onto+"platform").map(t=>label(st,t))[0]||"Platform"; avR.appendChild(el("span",{class:"pill"},reg+" \u2192 "+plat));}); body.appendChild(avR);}
+        seasons(st,s).forEach(sea=>{const sc=el("div",{class:"season",about:sea.value,typeof:"onto:Season"}); const sn=int(st,sea,NS.onto+"seasonNumber")||""; sc.appendChild(el("h2",{},"Season "+sn+" — "+label(st,sea))); const eps=el("div",{class:"episodes"}); episodes(st,sea).forEach(ep=>{const en=int(st,ep,NS.onto+"episodeNumber")||"?"; const row=el("div",{class:"ep",about:ep.value,typeof:"onto:Episode"}); row.appendChild(el("div",{class:"ep-num",property:"onto:episodeNumber"},"#"+en)); const main=el("div",{}); main.appendChild(el("p",{class:"ep-title",property:"rdfs:label"},label(st,ep))); const air=lit(st,ep,NS.onto+"airDate")[0]; const drs=objs(st,ep,NS.onto+"hasDirector").map(t=>label(st,t)); const wrs=objs(st,ep,NS.onto+"hasWriter").map(t=>label(st,t)); main.appendChild(el("div",{class:"ep-sub"},(air?"Air: "+air+" · ":"")+"Dir: "+(drs.length?[...new Set(drs)].join(", "):"—")+" · Writer: "+(wrs.length?[...new Set(wrs)].join(", "):"—"))); row.appendChild(main); eps.appendChild(row);}); sc.appendChild(eps); body.appendChild(sc);});
+        card.appendChild(body); m.appendChild(card);
+      }
+      (async function(){const st=await load(); render(st, namedNode(SERIES_IRI));})();
+    ]]>
+    </script>
   </body>
 </html>
