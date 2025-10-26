@@ -11,6 +11,7 @@
         ind:  https://jahid1081.github.io/ties4520-ontology/individuals.ttl#
       ">
   <head>
+  <meta name="series-id" content="Series_The_Boys"/>
     <title>The Boys — From TTL</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <style type="text/css">
@@ -37,7 +38,8 @@
       <a class="btn" href="index.html">&#8962; Home</a>
       <a class="btn" href="shows.xhtml">All Shows</a>
       <button class="btn" onclick="history.back()">&#8592; Back</button>
-    </header>
+    <div id="extra-meta" class="meta-row"></div>
+</header>
     <main class="wrap"><div id="mount"></div></main>
 
     <script type="module">
@@ -66,5 +68,10 @@
       (async function(){const st=await load(); render(st, namedNode(SERIES_IRI));})();
     ]]>
     </script>
-  </body>
+  
+  <script src="https://cdn.jsdelivr.net/npm/n3@1.17.3/browser/n3.min.js"></script>
+  <script src="viewer-util.js"></script>
+  <script src="series-enhance.js"></script>
+
+</body>
 </html>
