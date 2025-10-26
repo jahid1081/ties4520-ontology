@@ -1,0 +1,74 @@
+/* chips-fix.css — minimal, UI-preserving chip normalization
+   Drop this after your main stylesheet. It does NOT change your color scheme.
+*/
+
+/* Flexible row for typical metadata containers (works if any of these exist) */
+.series-meta,
+.series__meta,
+.meta,
+#series-meta,
+#enhanced-meta,
+.header-meta,
+[data-meta-row] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Normalize all pill-like elements found in those rows */
+.series-meta a,
+.series-meta span,
+.series-meta button,
+.series__meta a,
+.series__meta span,
+.series__meta button,
+.meta a,
+.meta span,
+.meta button,
+#series-meta a,
+#series-meta span,
+#series-meta button,
+#enhanced-meta a,
+#enhanced-meta span,
+#enhanced-meta button,
+.header-meta a,
+.header-meta span,
+.header-meta button,
+[data-meta-row] a,
+[data-meta-row] span,
+[data-meta-row] button,
+.series-meta .chip,
+.series__meta .chip,
+.meta .chip,
+#series-meta .chip,
+#enhanced-meta .chip,
+.header-meta .chip,
+[data-meta-row] .chip,
+.series-meta .btn,
+.series__meta .btn,
+.meta .btn,
+#series-meta .btn,
+#enhanced-meta .btn,
+.header-meta .btn,
+[data-meta-row] .btn,
+.series-meta .badge,
+.series__meta .badge,
+.meta .badge,
+#series-meta .badge,
+#enhanced-meta .badge,
+.header-meta .badge,
+[data-meta-row] .badge {
+  display: inline-flex !important;
+  align-items: center;
+  height: 28px;
+  padding: 0 .75rem;
+  border-radius: 9999px;
+  line-height: 1;
+  font-size: 12.5px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* Subtle label:value look inside chips (optional but harmless) */
+.chip__label{opacity:.7;margin-right:.25rem}
