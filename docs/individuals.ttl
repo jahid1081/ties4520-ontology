@@ -614,9 +614,48 @@ ind:Series_The_Boys_S02_E01   onto:isEpisodeOf ind:Series_The_Boys_S02 .
 ind:Series_The_Boys_S03_E01   onto:isEpisodeOf ind:Series_The_Boys_S03 .
 ind:Series_The_Boys_S04_E01   onto:isEpisodeOf ind:Series_The_Boys_S04 .
 
-## 8) Class coverage instances (no linking props exist in ontology)
-ind:TV_MA        a onto:ContentRating ; rdfs:label "TV-MA" .
-ind:Lang_English a onto:Language      ; rdfs:label "English" .
-ind:Award_Primetime_Emmys_The_Bear_2023 a onto:Award ; rdfs:label "Primetime Emmys — The Bear (2023)" .
-ind:Franchise_The_Boys a onto:Franchise ; rdfs:label "The Boys Universe" .
-ind:Credit_Generic a onto:Credit ; rdfs:label "Production Credit" .
+### Languages
+ind:Lang_English a onto:Language ; rdfs:label "English" .
+
+### TV Parental Guidelines ratings
+ind:TV_MA  a onto:ContentRating ; rdfs:label "TV-MA" .
+
+### Awards (minimal, concrete examples)
+ind:Emmy_2023_ComedySeries_Win a onto:Award ;
+  rdfs:label "Primetime Emmy — Outstanding Comedy Series (2023) — The Bear" ;
+  onto:relatedLink "https://en.wikipedia.org/wiki/75th_Primetime_Emmy_Awards" .
+
+ind:Emmy_2021_DramaSeries_Nom a onto:Award ;
+  rdfs:label "Primetime Emmy — Outstanding Drama Series (2021) — nomination — The Boys" ;
+  onto:relatedLink "https://en.wikipedia.org/wiki/73rd_Primetime_Emmy_Awards" .
+
+ind:Emmy_2023_GuestActress_Win a onto:Award ;
+  rdfs:label "Primetime Creative Arts Emmy — Outstanding Guest Actress in a Comedy Series (Judith Light, Poker Face)" ;
+  onto:relatedLink "https://apnews.com/article/emmys-2024-creative-arts-winners-fb20f2c4a4c461ea0d2b75a29ed1aef2" .
+
+### Franchise
+ind:Franchise_The_Boys a onto:Franchise ;
+  rdfs:label "The Boys (franchise)" ;
+  onto:relatedLink "https://en.wikipedia.org/wiki/The_Boys_(franchise)" .
+
+### Poker Face (Peacock)
+ind:Series_Poker_Face
+  onto:inLanguage     ind:Lang_English ;
+  onto:contentRating  ind:TV_MA ;                     # IMDb lists TV-MA
+  onto:isOngoing      "true"^^xsd:boolean ;
+  onto:hasAward       ind:Emmy_2023_GuestActress_Win .
+
+### The Bear (FX/Hulu/Disney+)
+ind:Series_The_Bear
+  onto:inLanguage     ind:Lang_English ;
+  onto:contentRating  ind:TV_MA ;                     # IMDb lists TV-MA
+  onto:isOngoing      "true"^^xsd:boolean ;
+  onto:hasAward       ind:Emmy_2023_ComedySeries_Win .
+
+### The Boys (Prime Video)
+ind:Series_The_Boys
+  onto:inLanguage     ind:Lang_English ;
+  onto:contentRating  ind:TV_MA ;                     # IMDb lists TV-MA
+  onto:isOngoing      "true"^^xsd:boolean ;
+  onto:partOfFranchise ind:Franchise_The_Boys ;
+  onto:hasAward        ind:Emmy_2021_DramaSeries_Nom .
