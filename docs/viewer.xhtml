@@ -80,7 +80,16 @@ tbody tr:nth-child(odd){background:var(--stripe)}
           var src=p.get('src')||'individuals.ttl';
           var iri=p.get('iri');
           var id=p.get('id');
-          var subject = iri || (id ? (new URL(src,location.href).href.replace(/#.*$/,''))+'#'+id : null);
+          
+          // Accept legacy aliases and robust id handling
+          var subjAlias=p.get('subject');
+          if(!iri && subjAlias) iri=subjAlias;
+          if(id && id.indexOf('#')!==-1){
+            if(/^https?:/i.test(id)){ iri=id; id=null; }
+            else { id=id.split('#').pop(); }
+          }
+          if(id && /^https?:/i.test(id)){ iri=id; id=null; }
+var subject = iri || (id ? (new URL(src,location.href).href.replace(/#.*$/,''))+'#'+id : null);
           document.getElementById('openRaw').setAttribute('href', src);
           startViewerWithSubject(src, subject);
         });
