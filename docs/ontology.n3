@@ -5,6 +5,7 @@
 @prefix onto: <https://jahid1081.github.io/ties4520-ontology/ontology.ttl#> .
 @prefix ind:  <https://jahid1081.github.io/ties4520-ontology/individuals.ttl#> .
 
+
 onto: a owl:Ontology ;
   rdfs:label "TV / Streaming Series Ontology (Expanded)" ;
   rdfs:comment "Meets course checklist: ≥20 classes; union/intersection/complement; enumeration; restrictions; ≥7 object props (incl. functional & inverse-functional & inverses); ≥7 datatype props; disjointness." ;
@@ -104,3 +105,20 @@ onto:Season rdfs:subClassOf
 
 onto:Series rdfs:subClassOf
   [ a owl:Restriction ; owl:onProperty onto:hasSeason ; owl:minCardinality "1"^^xsd:nonNegativeInteger ] .
+
+### NEW object properties to connect the “coverage” classes
+onto:inLanguage a owl:ObjectProperty ;
+  rdfs:domain [ a owl:Class ; owl:unionOf ( onto:Series onto:Season onto:Episode ) ] ;
+  rdfs:range  onto:Language .
+
+onto:contentRating a owl:ObjectProperty ;
+  rdfs:domain [ a owl:Class ; owl:unionOf ( onto:Series onto:Season onto:Episode ) ] ;
+  rdfs:range  onto:ContentRating .
+
+onto:hasAward a owl:ObjectProperty ;
+  rdfs:domain [ a owl:Class ; owl:unionOf ( onto:Series onto:Season onto:Episode onto:Person ) ] ;
+  rdfs:range  onto:Award .
+
+onto:partOfFranchise a owl:ObjectProperty ;
+  rdfs:domain onto:Series ;
+  rdfs:range  onto:Franchise .
