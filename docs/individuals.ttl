@@ -542,3 +542,81 @@ ind:Series_The_Boys_S04 onto:hasEpisode ind:Series_The_Boys_S04_E08 .
 ind:Series_The_Boys_S04_E08 onto:hasDirector ind:Person_Eric_Kripke .
 ind:Series_The_Boys_S04_E08 onto:hasWriter ind:Person_Jessica_Chou .
 ind:Series_The_Boys_S04_E08 onto:hasWriter ind:Person_David_Reed .
+
+# -----------------------------
+# AUGMENTATION (real, sourced)
+# -----------------------------
+
+## 1) Series status
+ind:Series_Poker_Face  onto:isOngoing "true"^^xsd:boolean .
+ind:Series_The_Bear    onto:isOngoing "true"^^xsd:boolean .
+ind:Series_The_Boys    onto:isOngoing "true"^^xsd:boolean .
+
+## 2) Inverse for home platform
+ind:Platform_Peacock       onto:isHomeForSeries ind:Series_Poker_Face .
+ind:Platform_Hulu          onto:isHomeForSeries ind:Series_The_Bear .
+ind:Platform_Prime_Video   onto:isHomeForSeries ind:Series_The_Boys .
+
+## 3) hasEpisodeIdentifier (IMDb) + relatedLink (episode pages)
+# Poker Face S01E01 — tt14399168 (IMDb). Source in prose.
+ind:ID_PokerFace_S01E01_IMDb a onto:Identifier ; rdfs:label "IMDb: tt14399168" .
+ind:Series_Poker_Face_S01_E01
+  onto:hasEpisodeIdentifier ind:ID_PokerFace_S01E01_IMDb ;
+  onto:relatedLink "https://www.imdb.com/title/tt14399168/" .
+
+# The Bear S01E01 — tt15472204 (IMDb).
+ind:ID_TheBear_S01E01_IMDb a onto:Identifier ; rdfs:label "IMDb: tt15472204" .
+ind:Series_The_Bear_S01_E01
+  onto:hasEpisodeIdentifier ind:ID_TheBear_S01E01_IMDb ;
+  onto:relatedLink "https://www.imdb.com/title/tt15472204/" .
+
+# The Boys S01E01 — tt7775902 (IMDb).
+ind:ID_TheBoys_S01E01_IMDb a onto:Identifier ; rdfs:label "IMDb: tt7775902" .
+ind:Series_The_Boys_S01_E01
+  onto:hasEpisodeIdentifier ind:ID_TheBoys_S01E01_IMDb ;
+  onto:relatedLink "https://www.imdb.com/title/tt7775902/" .
+
+## 4) hasAuteur where applicable (Rian Johnson-directed Poker Face eps)
+ind:Person_Rian_Johnson a onto:Auteur .
+ind:Series_Poker_Face_S01_E01 onto:hasAuteur ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E02 onto:hasAuteur ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E09 onto:hasAuteur ind:Person_Rian_Johnson .
+ind:Series_Poker_Face_S01_E10 onto:hasAuteur ind:Person_Rian_Johnson .
+
+## 5) contributedTo (Person → Series)
+ind:Person_Rian_Johnson        onto:contributedTo ind:Series_Poker_Face .
+ind:Person_Natasha_Lyonne      onto:contributedTo ind:Series_Poker_Face .
+ind:Person_Christopher_Storer  onto:contributedTo ind:Series_The_Bear .
+ind:Person_Joanna_Calo         onto:contributedTo ind:Series_The_Bear .
+ind:Person_Eric_Kripke         onto:contributedTo ind:Series_The_Boys .
+
+## 6) Inverse properties for seasons (isSeasonOf)
+ind:Series_Poker_Face_S01 onto:isSeasonOf ind:Series_Poker_Face .
+ind:Series_Poker_Face_S02 onto:isSeasonOf ind:Series_Poker_Face .
+ind:Series_The_Bear_S01   onto:isSeasonOf ind:Series_The_Bear .
+ind:Series_The_Bear_S02   onto:isSeasonOf ind:Series_The_Bear .
+ind:Series_The_Bear_S03   onto:isSeasonOf ind:Series_The_Bear .
+ind:Series_The_Bear_S04   onto:isSeasonOf ind:Series_The_Bear .
+ind:Series_The_Boys_S01   onto:isSeasonOf ind:Series_The_Boys .
+ind:Series_The_Boys_S02   onto:isSeasonOf ind:Series_The_Boys .
+ind:Series_The_Boys_S03   onto:isSeasonOf ind:Series_The_Boys .
+ind:Series_The_Boys_S04   onto:isSeasonOf ind:Series_The_Boys .
+
+## 7) Sample isEpisodeOf for season openers (property usage)
+ind:Series_Poker_Face_S01_E01 onto:isEpisodeOf ind:Series_Poker_Face_S01 .
+ind:Series_Poker_Face_S02_E01 onto:isEpisodeOf ind:Series_Poker_Face_S02 .
+ind:Series_The_Bear_S01_E01   onto:isEpisodeOf ind:Series_The_Bear_S01 .
+ind:Series_The_Bear_S02_E01   onto:isEpisodeOf ind:Series_The_Bear_S02 .
+ind:Series_The_Bear_S03_E01   onto:isEpisodeOf ind:Series_The_Bear_S03 .
+ind:Series_The_Bear_S04_E01   onto:isEpisodeOf ind:Series_The_Bear_S04 .
+ind:Series_The_Boys_S01_E01   onto:isEpisodeOf ind:Series_The_Boys_S01 .
+ind:Series_The_Boys_S02_E01   onto:isEpisodeOf ind:Series_The_Boys_S02 .
+ind:Series_The_Boys_S03_E01   onto:isEpisodeOf ind:Series_The_Boys_S03 .
+ind:Series_The_Boys_S04_E01   onto:isEpisodeOf ind:Series_The_Boys_S04 .
+
+## 8) Class coverage instances (no linking props exist in ontology)
+ind:TV_MA        a onto:ContentRating ; rdfs:label "TV-MA" .
+ind:Lang_English a onto:Language      ; rdfs:label "English" .
+ind:Award_Primetime_Emmys_The_Bear_2023 a onto:Award ; rdfs:label "Primetime Emmys — The Bear (2023)" .
+ind:Franchise_The_Boys a onto:Franchise ; rdfs:label "The Boys Universe" .
+ind:Credit_Generic a onto:Credit ; rdfs:label "Production Credit" .
