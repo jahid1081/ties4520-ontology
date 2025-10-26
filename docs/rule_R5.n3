@@ -3,9 +3,19 @@
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix time: <http://www.w3.org/2000/10/swap/time#> .
 @prefix onto: <https://jahid1081.github.io/ties4520-ontology/ontology.ttl#> .
-@prefix ind:  <https://jahid1081.github.io/ties4520-ontology/individuals.ttl#> .
+@prefix q:    <http://eulersharp.sourceforge.net/2003/03swap/query#> .
 
-# R5: extracted from rules.n3
-{ ?E a onto:Episode ; onto:airDate ?D ; onto:partOfSeries ?S .
-  ?D time:greaterThanOrEqualTo "2024-01-01"^^xsd:date }
-=> { ?S onto:isOngoing true } .
+# R5 — If any Episode of Series ?S has airDate >= 2024-01-01, infer that ?S is ongoing.
+{
+  ?E  a                 onto:Episode ;
+      onto:airDate      ?D ;
+      onto:partOfSeries ?S .
+  ?D time:greaterThanOrEqualTo "2024-01-01"^^xsd:date .
+}
+=>
+{ ?S onto:isOngoing true } .
+
+# ---- Query so EYE prints something ----
+# Return all (derived or present) ongoing-series triples as output.
+{ ?S onto:isOngoing true }
+  q:construct { ?S onto:isOngoing true } .
