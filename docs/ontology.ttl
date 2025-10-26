@@ -105,3 +105,20 @@ onto:Season rdfs:subClassOf
 
 onto:Series rdfs:subClassOf
   [ a owl:Restriction ; owl:onProperty onto:hasSeason ; owl:minCardinality "1"^^xsd:nonNegativeInteger ] .
+
+### NEW object properties to connect the “coverage” classes
+onto:inLanguage a owl:ObjectProperty ;
+  rdfs:domain [ a owl:Class ; owl:unionOf ( onto:Series onto:Season onto:Episode ) ] ;
+  rdfs:range  onto:Language .
+
+onto:contentRating a owl:ObjectProperty ;
+  rdfs:domain [ a owl:Class ; owl:unionOf ( onto:Series onto:Season onto:Episode ) ] ;
+  rdfs:range  onto:ContentRating .
+
+onto:hasAward a owl:ObjectProperty ;
+  rdfs:domain [ a owl:Class ; owl:unionOf ( onto:Series onto:Season onto:Episode onto:Person ) ] ;
+  rdfs:range  onto:Award .
+
+onto:partOfFranchise a owl:ObjectProperty ;
+  rdfs:domain onto:Series ;
+  rdfs:range  onto:Franchise .
