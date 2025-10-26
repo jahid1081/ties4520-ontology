@@ -1,0 +1,11 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+@prefix onto: <https://jahid1081.github.io/ties4520-ontology/ontology.ttl#> .
+@prefix ind:  <https://jahid1081.github.io/ties4520-ontology/individuals.ttl#> .
+
+# R5: extracted from rules.n3
+{ ?E a onto:Episode ; onto:airDate ?D ; onto:partOfSeries ?S .
+  ?D time:greaterThanOrEqualTo "2024-01-01"^^xsd:date }
+=> { ?S onto:isOngoing true } .
