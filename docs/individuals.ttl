@@ -558,19 +558,19 @@ ind:Platform_Hulu          onto:isHomeForSeries ind:Series_The_Bear .
 ind:Platform_Prime_Video   onto:isHomeForSeries ind:Series_The_Boys .
 
 ## 3) hasEpisodeIdentifier (IMDb) + relatedLink (episode pages)
-# Poker Face S01E01 — tt14399168 (IMDb). Source in prose.
+# Poker Face S01E01 - tt14399168 (IMDb). Source in prose.
 ind:ID_PokerFace_S01E01_IMDb a onto:Identifier ; rdfs:label "IMDb: tt14399168" .
 ind:Series_Poker_Face_S01_E01
   onto:hasEpisodeIdentifier ind:ID_PokerFace_S01E01_IMDb ;
   onto:relatedLink "https://www.imdb.com/title/tt14399168/" .
 
-# The Bear S01E01 — tt15472204 (IMDb).
+# The Bear S01E01 - tt15472204 (IMDb).
 ind:ID_TheBear_S01E01_IMDb a onto:Identifier ; rdfs:label "IMDb: tt15472204" .
 ind:Series_The_Bear_S01_E01
   onto:hasEpisodeIdentifier ind:ID_TheBear_S01E01_IMDb ;
   onto:relatedLink "https://www.imdb.com/title/tt15472204/" .
 
-# The Boys S01E01 — tt7775902 (IMDb).
+# The Boys S01E01 - tt7775902 (IMDb).
 ind:ID_TheBoys_S01E01_IMDb a onto:Identifier ; rdfs:label "IMDb: tt7775902" .
 ind:Series_The_Boys_S01_E01
   onto:hasEpisodeIdentifier ind:ID_TheBoys_S01E01_IMDb ;
@@ -622,15 +622,15 @@ ind:TV_MA  a onto:ContentRating ; rdfs:label "TV-MA" .
 
 ### Awards (minimal, concrete examples)
 ind:Emmy_2023_ComedySeries_Win a onto:Award ;
-  rdfs:label "Primetime Emmy — Outstanding Comedy Series (2023) — The Bear" ;
+  rdfs:label "Primetime Emmy - Outstanding Comedy Series (2023) - The Bear" ;
   onto:relatedLink "https://en.wikipedia.org/wiki/75th_Primetime_Emmy_Awards" .
 
 ind:Emmy_2021_DramaSeries_Nom a onto:Award ;
-  rdfs:label "Primetime Emmy — Outstanding Drama Series (2021) — nomination — The Boys" ;
+  rdfs:label "Primetime Emmy - Outstanding Drama Series (2021) - nomination - The Boys" ;
   onto:relatedLink "https://en.wikipedia.org/wiki/73rd_Primetime_Emmy_Awards" .
 
 ind:Emmy_2023_GuestActress_Win a onto:Award ;
-  rdfs:label "Primetime Creative Arts Emmy — Outstanding Guest Actress in a Comedy Series (Judith Light, Poker Face)" ;
+  rdfs:label "Primetime Creative Arts Emmy - Outstanding Guest Actress in a Comedy Series (Judith Light, Poker Face)" ;
   onto:relatedLink "https://apnews.com/article/emmys-2024-creative-arts-winners-fb20f2c4a4c461ea0d2b75a29ed1aef2" .
 
 ### Franchise
