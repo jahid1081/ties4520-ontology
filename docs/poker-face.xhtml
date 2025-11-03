@@ -12,7 +12,7 @@
       ">
   <head>
   <meta name="series-id" content="Series_Poker_Face"/>
-    <title>Poker Face — From TTL</title>
+    <title>Poker Face - From TTL</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <style type="text/css">
       /* same styles as shows.xhtml, trimmed */
@@ -148,7 +148,7 @@
         seasons(store, s).forEach(sea=>{
           const sc = el("div", { class:"season", about:sea.value, typeof:"onto:Season" });
           const sn = intProp(store, sea, NS.onto+"seasonNumber") || "";
-          sc.appendChild(el("h2", {}, "Season "+sn+" — "+label(store, sea)));
+          sc.appendChild(el("h2", {}, "Season "+sn+" - "+label(store, sea)));
           const epsWrap = el("div", { class:"episodes" });
 
           episodes(store, sea).forEach(ep=>{
@@ -161,7 +161,7 @@
             const drs = objs(store, ep, NS.onto+"hasDirector").map(t=>label(store,t));
             const wrs = objs(store, ep, NS.onto+"hasWriter").map(t=>label(store,t));
             main.appendChild(el("div", { class:"ep-sub" },
-              (air? "Air: "+air+" · " : "")+"Dir: "+(drs.length? uniq(drs).join(", "):"—")+" · Writer: "+(wrs.length? uniq(wrs).join(", "):"—")
+              (air? "Air: "+air+" · " : "")+"Dir: "+(drs.length? uniq(drs).join(", "):"-")+" · Writer: "+(wrs.length? uniq(wrs).join(", "):"-")
             ));
             row.appendChild(main);
             epsWrap.appendChild(row);
