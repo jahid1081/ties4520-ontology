@@ -230,7 +230,7 @@
         seasons.forEach(sea=>{
           const snum = byIntProp(store, sea, NS.onto+"seasonNumber");
           const sh = el("div", { class:"season", about:sea.value, typeof:"onto:Season" });
-          sh.appendChild(el("h3", {}, "Season " + snum + (label(store, sea) ? (" — " + label(store, sea)) : "")));
+          sh.appendChild(el("h3", {}, "Season " + snum + (label(store, sea) ? (" - " + label(store, sea)) : "")));
           const epsWrap = el("div", { class:"episodes" });
 
           const eps = episodesOf(store, sea);
@@ -247,9 +247,9 @@
 
             const sub = el("div", { class:"ep-sub" },
               (air ? ("Air: " + air + " · ") : "") +
-              (drs.length ? ("Dir: " + uniq(drs).join(", ")) : "Dir: —") +
+              (drs.length ? ("Dir: " + uniq(drs).join(", ")) : "Dir: -") +
               " · " +
-              (wrs.length ? ("Writer: " + uniq(wrs).join(", ")) : "Writer: —")
+              (wrs.length ? ("Writer: " + uniq(wrs).join(", ")) : "Writer: -")
             );
 
             main.appendChild(title);
